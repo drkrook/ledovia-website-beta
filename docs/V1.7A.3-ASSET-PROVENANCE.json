@@ -1,0 +1,104 @@
+{
+  "mission": "V1.7A.3 professional photography",
+  "verified_date": "2026-11-10",
+  "processing": "Actual source images inspected, cropped to 5:4 and resized to 480/800px WebP at quality 80 using existing Sharp. No generative edits, logos added or subject manipulation.",
+  "use": "Illustrative imagery only. No customer relationship, product use, agency affiliation or endorsement claimed.",
+  "assets": [
+    {
+      "package": "response",
+      "photographer": "John Daves / U.S. Army Corps of Engineers Honolulu District",
+      "source_page": "https://www.dvidshub.net/image/8231203/soil-sampling-lahaina",
+      "downloaded_rendition": "https://d1ldvf68ux039x.cloudfront.net/thumbs/photos/2402/8231203/2000w_q95.jpg",
+      "crop": {
+        "left": 600,
+        "top": 160,
+        "width": 1200,
+        "height": 960
+      },
+      "license": "Public domain U.S. government photograph; DVIDS commercial-use conditions apply",
+      "license_url": "https://www.dvidshub.net/about/copyright",
+      "observed_content": "Two recovery contractors in white hard hats and reflective safety vests collecting soil samples at a wildfire-affected property. No company branding visible in selected crop.",
+      "context": "Lahaina, Hawaii, February 4, 2024. Source caption confirms sampling of cleared wildfire debris sites; not presented as building repair or a Ledovia customer.",
+      "source_sha256": "f51777d5966fa53d001df1656e2f2ff70a97e3a00fa3d0b228e51be0b1ea292c",
+      "source_dimensions": {
+        "width": 1999,
+        "height": 1333
+      },
+      "exports": [
+        {
+          "path": "public/images/pricing/cards/response-480.webp",
+          "width": 480,
+          "height": 384,
+          "bytes": 48468,
+          "sha256": "c2661a903b139208f72333e752a55554c9aabe757dc74e7252b98bc6f19ed4be"
+        },
+        {
+          "path": "public/images/pricing/cards/response-800.webp",
+          "width": 800,
+          "height": 640,
+          "bytes": 103666,
+          "sha256": "e4c38c813f1989fce41eacdedc1432410a6be93230f55e460eafd6f1ef5b2b02"
+        }
+      ],
+      "retrieved_source_page_sha256": "df86e6bf029f50d793d0fcb5ecc2105bfe8232ca4262e3e626f3343808f5c2a3"
+    },
+    {
+      "package": "government",
+      "photographer": "Faruk Tokluo\u011flu",
+      "source_page": "https://www.pexels.com/photo/group-of-paramedics-walking-through-a-demolished-city-16105713/",
+      "downloaded_rendition": "https://images.pexels.com/photos/16105713/pexels-photo-16105713.jpeg?cs=srgb&dl=pexels-faruktokluoglu-16105713.jpg&fm=jpg",
+      "crop": {
+        "left": 456,
+        "top": 0,
+        "width": 4560,
+        "height": 3648
+      },
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "observed_content": "Search-and-rescue team in orange protective clothing and helmets walking through collapsed buildings. Real uniform patches remain; no invented agency insignia.",
+      "context": "Source describes search-and-rescue operations in a demolished area. No claim about the team using or endorsing Ledovia.",
+      "source_sha256": "db111401ef2009b5f3e97ca66d08ebfeb20dadaa70a6376368452ed1b8831c23",
+      "source_dimensions": {
+        "width": 5472,
+        "height": 3648
+      },
+      "exports": [
+        {
+          "path": "public/images/pricing/cards/government-480.webp",
+          "width": 480,
+          "height": 384,
+          "bytes": 38748,
+          "sha256": "c7bc22a7e9c71c338862d4d32fe10a29cb6eda6e297d7a3057b26bcb9678df74"
+        },
+        {
+          "path": "public/images/pricing/cards/government-800.webp",
+          "width": 800,
+          "height": 640,
+          "bytes": 74748,
+          "sha256": "25ddd67270d279dca577577a089fa0cf70e4786b51c1fbfb1826c4f8b52ea837"
+        }
+      ],
+      "retrieved_source_page_sha256": "d9bd826178cd058187a46e4c1f029691eaa7cb636fc5d92cfaec46ec3fe38150"
+    }
+  ],
+  "licensing_evidence": [
+    {
+      "url": "https://www.pexels.com/license/",
+      "verified": "2026-11-10",
+      "evidence": "Pexels permits use on websites and product promotion, modification and optional attribution. No implied endorsement; no offensive portrayal, stock redistribution or trademark use.",
+      "retrieved_page_sha256": "8e8a442a31dadd42d5564abe0badea1824350f125e2d4e19e885bc3685279a3e"
+    },
+    {
+      "url": "https://www.dvidshub.net/about/copyright",
+      "verified": "2026-11-10",
+      "evidence": "Selected official image page identifies this work as PUBLIC DOMAIN. DVIDS public-use notice authorizes commercial use subject to no implied endorsement and disclaimer requirements; government marks and individual privacy/publicity rights are not waived. Selected crop has no visible company or military marks.",
+      "required_disclaimer": "The appearance of U.S. Department of War (DoW) visual information does not imply or constitute DoW endorsement.",
+      "retrieved_page_sha256": "8dbda4d2cd4fa1b8c70be60cfa9311683dba140a0abce0871dda479093d5a5d2"
+    }
+  ],
+  "rejected_fallback": {
+    "source_page": "https://www.pexels.com/photo/photograph-of-men-with-hard-hats-wearing-reflective-vests-11790051/",
+    "photographer": "Karan Wang",
+    "reason": "Actual image inspected: three workers beside an intact waterfront. Does not visibly establish damaged property or disaster recovery; not used."
+  }
+}

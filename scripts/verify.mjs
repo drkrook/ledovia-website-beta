@@ -29,7 +29,7 @@ for(const route of routes){
  assert.match(html,/name="description"/);
  assert.ok(html.includes(`rel="canonical" href="${origin}${base}${route}"`));
  assert.ok(!/localStorage|serviceWorker/.test(html));
- if(route!=='pricing/') assert.ok(!/<form/.test(html));
+ if(route!=='contact/') assert.ok(!/<form/.test(html));
  for(const [,href] of html.matchAll(/(?:href|src)="([^" ]+)"/g)){
   if(/^(?:https?:|data:|mailto:)/.test(href))continue;
   const parsed=new URL(href,origin+base+route);
@@ -111,7 +111,8 @@ assert.ok(pricing.includes('Enable JavaScript to compare annual examples'));
 assert.equal((pricing.match(/scope="row"/g)||[]).length,7);
 assert.ok(!/<iframe|<video/i.test(pricing));
 assert.ok(!/href="(?:tel:|[^"]*(?:checkout|subscribe|purchase))/i.test(pricing));
-const {inquiryEmail,validateInquiryDraft,publicContactEmail}=await import('../src/lib/professional-inquiries.ts');
+const contact=await readFile(path.join(root,'contact/index.html'),'utf8');
+const {inquiryEmail,validateInquiryDraft,publicContactEmail,inquiryInterest}=await import('../src/lib/professional-inquiries.ts');
 assert.equal(publicContactEmail,'contact@getledovia.com');
 for(const product of ['response','government']) {
  const link=new URL(inquiryEmail(product));
@@ -130,13 +131,14 @@ for(const organization of [' ', 'a', 'a'.repeat(101)]) assert.ok(validateInquiry
 for(const needs of [' '.repeat(30),'a'.repeat(19),'a'.repeat(2001)]) assert.ok(validateInquiryDraft({...validDraft,needs}).needs);
 assert.deepEqual(validateInquiryDraft({...validDraft,needs:'a'.repeat(20)}),{});
 assert.deepEqual(validateInquiryDraft({...validDraft,needs:'a'.repeat(2000)}),{});
-assert.equal((pricing.match(/<form\b/g)||[]).length,1);
-const inquiryForm=pricing.match(/<form\b[^>]*>[\s\S]*?<\/form>/)?.[0];
+assert.equal((pricing.match(/<form\b/g)||[]).length,0);
+assert.equal((contact.match(/<form\b/g)||[]).length,1);
+const inquiryForm=contact.match(/<form\b[^>]*>[\s\S]*?<\/form>/)?.[0];
 assert.ok(inquiryForm);assert.match(inquiryForm,/id="professional-inquiry"/);assert.match(inquiryForm,/data-delivery="inactive"/);
 assert.ok(!/\saction=|\sname=|type="submit"/.test(inquiryForm));
 assert.match(inquiryForm,/id="inquiry-check"[^>]*type="button"[^>]*disabled/);
-assert.ok(pricing.includes('Form preview — sending is not available yet.'));
-assert.ok(pricing.includes('This form does not send or save them.'));
+assert.ok(contact.includes('Form preview — sending is not available yet.'));
+assert.ok(contact.includes('This form does not send or save them.'));
 for(const [id,type] of [['name','text'],['organization','text'],['email','email']]) {
  assert.match(inquiryForm,new RegExp(`<label[^>]*for="inquiry-${id}"`));
  assert.match(inquiryForm,new RegExp(`<input[^>]*id="inquiry-${id}"[^>]*type="${type}"[^>]*required`));
@@ -144,15 +146,50 @@ for(const [id,type] of [['name','text'],['organization','text'],['email','email'
 }
 assert.match(inquiryForm,/<select[^>]*id="inquiry-product"[^>]*required/);
 assert.match(inquiryForm,/<textarea[^>]*id="inquiry-needs"[^>]*required[^>]*minlength="20"[^>]*maxlength="2000"/);
-const mailLinks=[...pricing.matchAll(/href="(mailto:[^"]+)"/g)].map(match=>new URL(match[1].replaceAll('&amp;','&')));
-assert.equal(mailLinks.length,4);
+const mailLinks=[...(pricing+contact).matchAll(/href="(mailto:[^"]+)"/g)].map(match=>new URL(match[1].replaceAll('&amp;','&')));
+assert.equal(mailLinks.length,5);
 for(const mail of mailLinks) assert.equal(mail.pathname,publicContactEmail);
 assert.ok(!pricing.includes('taponte'+'@getledovia.com'));
-assert.equal((pricing.match(/>Planned</g)||[]).length,2);
+assert.equal((pricing.match(/class="planned-badge"[^>]*>Planned</g)||[]).length,2);
 assert.equal((pricing.match(/Contact for Pricing — Planned Offering/g)||[]).length,2);
-assert.ok(pricing.includes('Every Adventure'));
+assert.ok(pricing.includes('Choose Your Ledovia.'));
+assert.ok(!/<section[^>]*class="adventure-intro"/.test(pricing));
+assert.equal((pricing.match(/Source-confirmed common capability; not a finalized package entitlement/g)||[]).length,10);
+assert.equal((pricing.match(/aria-hidden="true" class="foundation-check"/g)||[]).length,10);
 assert.ok(pricing.includes('Proposed package direction'));
-console.log('PASS inquiry validation: required fields, trimming, email format, invalid product, length boundaries; 4 mailto links target approved address and product-specific subjects.');
+console.log('PASS inquiry validation: required fields, trimming, email format, invalid product, length boundaries; 5 mailto links across Pricing and Contact target approved address and product-specific subjects.');
 assert.ok(!(await readdir(root)).includes('CNAME'));
 console.log('PASS pricing content: illustrative labels, selector fallback, seven comparison rows, Planned professional cards; only an inactive local-validation form, no purchase controls.');
 console.log(`PASS ${live?'LIVE HTTP + exact built bytes':'STATIC'}: ${routes.length} pages, ${links} link/asset references, ${resources.size} unique resources; base paths, fragments, metadata, landmarks, inactive inquiry form only; no storage/CNAME.`);
+
+for(const [query,expected] of [['','general'],['?interest=response','response'],['?interest=government','government'],['?interest=general','general'],['?interest=other','general'],['?interest=%3Cscript%3E','general'],['?interest=RESPONSE','general']]) assert.equal(inquiryInterest(query),expected);
+assert.deepEqual(validateInquiryDraft({...validDraft,product:'general'}),{});
+assert.match(contact,/<option value="general" selected/);
+for(const product of ['response','government']) assert.ok(pricing.includes(`href="${base}contact/?interest=${product}"`));
+assert.ok(!pricing.includes('href="#professional-inquiries"'));
+for(const route of routes){const html=await readFile(path.join(root,route.endsWith('.html')?route:route+'index.html'),'utf8');assert.ok(html.includes(`href="${base}contact/"`));}
+const formSource=await readFile('src/components/InquiryForm.astro','utf8');
+assert.ok(formSource.includes('product.value=inquiryInterest(window.location.search)'));
+assert.ok(formSource.includes("form.addEventListener('submit',event=>event.preventDefault())"));
+assert.ok(!/fetch\(|XMLHttpRequest|sessionStorage|localStorage/.test(formSource));
+console.log('PASS Contact routes, recognized product preselection and safe fallback, general inquiry, navigation destinations, local-only form safeguards and approved email addresses. Browser interaction unverified.');
+
+const photoManifest=JSON.parse(await readFile('docs/V1.7A.3-ASSET-PROVENANCE.json','utf8'));
+const {default:sharp}=await import('sharp');
+assert.deepEqual(photoManifest.assets.map(a=>a.package),['response','government']);
+for(const asset of photoManifest.assets){
+ assert.ok(asset.photographer && asset.source_page.startsWith('https://') && asset.license_url.startsWith('https://'));
+ assert.match(asset.source_sha256,/^[a-f0-9]{64}$/);
+ assert.deepEqual(asset.exports.map(e=>e.width),[480,800]);
+ for(const output of asset.exports){
+  const bytes=await readFile(output.path);
+  assert.equal(createHash('sha256').update(bytes).digest('hex'),output.sha256);
+  assert.equal(bytes.length,output.bytes);
+  const image=await sharp(bytes).metadata();
+  assert.equal(image.format,'webp');assert.equal(image.width,output.width);assert.equal(image.height,output.height);
+  assert.ok(pricing.includes(output.path.replace('public/',base)));
+ }
+ assert.ok(pricing.includes(asset.source_page));
+}
+assert.ok(pricing.includes('The appearance of U.S. Department of War (DoW) visual information does not imply or constitute DoW endorsement.'));
+console.log('PASS professional photography: four responsive WebP variants decoded, dimensions/bytes/SHA-256 match provenance; source credits and non-endorsement notice present.');

@@ -6,7 +6,7 @@
  <form id="professional-inquiry" data-delivery="inactive" aria-describedby="inquiry-delivery inquiry-privacy" autocomplete="off">
   <div class="form-row"><div class="field"><label for="inquiry-name">Name <span>(required)</span></label><input id="inquiry-name" type="text" required minlength="2" maxlength="100" aria-describedby="inquiry-name-error"/><p class="field-error" id="inquiry-name-error"></p></div><div class="field"><label for="inquiry-organization">Organization <span>(required)</span></label><input id="inquiry-organization" type="text" required minlength="2" maxlength="100" aria-describedby="inquiry-organization-error"/><p class="field-error" id="inquiry-organization-error"></p></div></div>
   <div class="field"><label for="inquiry-email">Email <span>(required)</span></label><input id="inquiry-email" type="email" required maxlength="254" aria-describedby="inquiry-email-error"/><p class="field-error" id="inquiry-email-error"></p></div>
-  <div class="field"><label for="inquiry-product">Product interest <span>(required)</span></label><select id="inquiry-product" required aria-describedby="inquiry-product-error"><option value="">Choose a planned offering</option><option value="response">Ledovia Response</option><option value="government">Ledovia Government</option></select><p class="field-error" id="inquiry-product-error"></p></div>
+  <div class="field"><label for="inquiry-product">Product interest <span>(required)</span></label><select id="inquiry-product" required aria-describedby="inquiry-product-error"><option value="">Choose an inquiry type</option><option value="general" selected>General inquiry</option><option value="response">Ledovia Response</option><option value="government">Ledovia Government</option></select><p class="field-error" id="inquiry-product-error"></p></div>
   <div class="field"><label for="inquiry-needs">Brief description of needs <span>(required)</span></label><textarea id="inquiry-needs" required minlength="20" maxlength="2000" rows="5" aria-describedby="inquiry-needs-hint inquiry-needs-error"></textarea><p class="field-hint" id="inquiry-needs-hint">20–2,000 characters. A high-level description is enough.</p><p class="field-error" id="inquiry-needs-error"></p></div>
   <p class="privacy-note" id="inquiry-privacy">Keep descriptions general. Do not enter personal records, precise sensitive locations, credentials, or confidential operational information. This website does not transmit or store this draft. Direct email uses your email provider and sends only when you choose to send it.</p>
   <button class="button" id="inquiry-check" type="button" disabled>Check details locally <span aria-hidden="true">↗</span></button><p class="form-feedback" id="inquiry-feedback" role="status" aria-live="polite">No message has been sent.</p>
@@ -14,7 +14,7 @@
  </form>
 </section>
 <script>
-import {validateInquiryDraft,type InquiryDraft} from '../lib/professional-inquiries';
+import {validateInquiryDraft,inquiryInterest,type InquiryDraft} from '../lib/professional-inquiries';
 const form=document.querySelector<HTMLFormElement>('#professional-inquiry');
 const check=document.querySelector<HTMLButtonElement>('#inquiry-check');
 const feedback=document.querySelector<HTMLElement>('#inquiry-feedback');
@@ -22,6 +22,8 @@ const fields=['name','organization','email','product','needs'] as const;
 if(form && check) {
  form.addEventListener('submit',event=>event.preventDefault());
  check.disabled=false;
+ const product=document.querySelector<HTMLSelectElement>('#inquiry-product');
+ if(product) product.value=inquiryInterest(window.location.search);
  const control=(key:typeof fields[number])=>document.getElementById(`inquiry-${key}`) as HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement;
  for(const key of fields) {
   control(key).addEventListener('input',()=>{

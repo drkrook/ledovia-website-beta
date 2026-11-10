@@ -8,6 +8,12 @@ export function inquiryEmail(product: ProfessionalProduct) {
  return `mailto:${publicContactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
+// Only recognized product values may influence the local preview. Never insert URL text into HTML.
+export function inquiryInterest(search: string): 'general' | ProfessionalProduct {
+ const value=new URLSearchParams(search).get('interest');
+ return value==='response' || value==='government' ? value : 'general';
+}
+
 export interface InquiryDraft {name:string;organization:string;email:string;product:string;needs:string;}
 export type InquiryErrors = Partial<Record<keyof InquiryDraft,string>>;
 export function validateInquiryDraft(draft: InquiryDraft): InquiryErrors {
@@ -18,7 +24,7 @@ export function validateInquiryDraft(draft: InquiryDraft): InquiryErrors {
  }
  const email=draft.email.trim();
  if(email.length>254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email='Enter a valid email address, such as name@example.com.';
- if(draft.product!=='response' && draft.product!=='government') errors.product='Choose Ledovia Response or Ledovia Government.';
+ if(draft.product!=='general' && draft.product!=='response' && draft.product!=='government') errors.product='Choose General inquiry, Ledovia Response or Ledovia Government.';
  const needs=draft.needs.trim();
  if(needs.length<20 || needs.length>2000) errors.needs='Describe your needs in 20–2,000 characters. Do not include sensitive information.';
  return errors;
