@@ -1,0 +1,31 @@
+{
+  "asset": "Pricing hero \u2014 parent and child hiking",
+  "photographer": "Greg Betanov",
+  "provider": "Pexels",
+  "photo_id": 9849120,
+  "page": "https://www.pexels.com/photo/back-view-of-a-parent-and-a-child-in-a-forest-9849120/",
+  "downloaded_rendition": "https://images.pexels.com/photos/9849120/pexels-photo-9849120.jpeg?auto=compress&cs=tinysrgb&w=1600",
+  "license": "Pexels License",
+  "license_url": "https://www.pexels.com/license/",
+  "verified_date": "2026-11-10",
+  "source_rendition_sha256": "0eb629ad1909945388ea3dc0fdd9dee49640cd9d01adbde4ca75ce615d0c217f",
+  "edits": "Width resizing and WebP encoding at quality 82; CSS crops for responsive placement. No generative edits.",
+  "usage": "Illustrative adventure imagery, not a Ledovia customer endorsement or product demonstration.",
+  "exports": [
+    {
+      "path": "public/images/pricing/family-hike-1200.webp",
+      "bytes": 587370,
+      "sha256": "44139dd9e165c16d3da57b63e2131993f42b928909238f2aa188f0154681641d"
+    },
+    {
+      "path": "public/images/pricing/family-hike-480.webp",
+      "bytes": 105678,
+      "sha256": "2153b24cdc7871c42370a270d330d969750549ffa81a1b68d3c53a271aee519c"
+    },
+    {
+      "path": "public/images/pricing/family-hike-800.webp",
+      "bytes": 281020,
+      "sha256": "c39de058c3e966489cce566c4024c03fce810c38aa00c0d6e4ea48bbc8ca1b9d"
+    }
+  ]
+}

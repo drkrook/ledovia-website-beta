@@ -28,7 +28,8 @@ for(const route of routes){
  assert.match(html,/name="robots" content="noindex,nofollow"/);
  assert.match(html,/name="description"/);
  assert.ok(html.includes(`rel="canonical" href="${origin}${base}${route}"`));
- assert.ok(!/<form|localStorage|serviceWorker/.test(html));
+ assert.ok(!/localStorage|serviceWorker/.test(html));
+ if(route!=='pricing/') assert.ok(!/<form/.test(html));
  for(const [,href] of html.matchAll(/(?:href|src)="([^" ]+)"/g)){
   if(/^(?:https?:|data:|mailto:)/.test(href))continue;
   const parsed=new URL(href,origin+base+route);
@@ -108,12 +109,50 @@ assert.match(pricing,/<input[^>]*name="illustrative-billing"[^>]*value="annual"/
 assert.match(pricing,/id="billing-status"[^>]*role="status"/);
 assert.ok(pricing.includes('Enable JavaScript to compare annual examples'));
 assert.equal((pricing.match(/scope="row"/g)||[]).length,7);
-assert.ok(!/<form|<iframe|<video|<button/i.test(pricing));
-assert.ok(!/href="(?:mailto:|tel:|[^"]*(?:checkout|subscribe|purchase))/i.test(pricing));
-const professional=pricing.slice(pricing.indexOf('<section class="professional-section'),pricing.indexOf('<section class="container pricing-section faq-section'));
-assert.equal((professional.match(/>Planned</g)||[]).length,2);
-assert.equal((professional.match(/>Contact Us</g)||[]).length,2);
-assert.ok(!/<a\s|<button/.test(professional));
+assert.ok(!/<iframe|<video/i.test(pricing));
+assert.ok(!/href="(?:tel:|[^"]*(?:checkout|subscribe|purchase))/i.test(pricing));
+const {inquiryEmail,validateInquiryDraft,publicContactEmail}=await import('../src/lib/professional-inquiries.ts');
+assert.equal(publicContactEmail,'contact@getledovia.com');
+for(const product of ['response','government']) {
+ const link=new URL(inquiryEmail(product));
+ assert.equal(link.protocol,'mailto:');assert.equal(link.pathname,publicContactEmail);
+ assert.ok(link.searchParams.get('subject').includes(product==='response'?'Ledovia Response':'Ledovia Government'));
+ assert.ok(link.searchParams.get('body').includes('Current workflow:'));
+ assert.ok(link.searchParams.get('body').includes('Requirements:'));
+}
+const validDraft={name:'Example User',organization:'Example Organization',email:'name@example.com',product:'response',needs:'We would like to discuss future field-team mapping needs.'};
+assert.deepEqual(validateInquiryDraft(validDraft),{});
+assert.deepEqual(validateInquiryDraft({...validDraft,product:'government'}),{});
+assert.deepEqual(Object.keys(validateInquiryDraft({name:' ',organization:' ',email:'invalid',product:'other',needs:'short'})).sort(),['email','name','needs','organization','product']);
+for(const email of ['first@second','first@@example.com','person@example.com\nBcc:other@example.com','a'.repeat(255)+'@example.com']) assert.ok(validateInquiryDraft({...validDraft,email}).email);
+for(const name of [' ', 'a', 'a'.repeat(101)]) assert.ok(validateInquiryDraft({...validDraft,name}).name);
+for(const organization of [' ', 'a', 'a'.repeat(101)]) assert.ok(validateInquiryDraft({...validDraft,organization}).organization);
+for(const needs of [' '.repeat(30),'a'.repeat(19),'a'.repeat(2001)]) assert.ok(validateInquiryDraft({...validDraft,needs}).needs);
+assert.deepEqual(validateInquiryDraft({...validDraft,needs:'a'.repeat(20)}),{});
+assert.deepEqual(validateInquiryDraft({...validDraft,needs:'a'.repeat(2000)}),{});
+assert.equal((pricing.match(/<form\b/g)||[]).length,1);
+const inquiryForm=pricing.match(/<form\b[^>]*>[\s\S]*?<\/form>/)?.[0];
+assert.ok(inquiryForm);assert.match(inquiryForm,/id="professional-inquiry"/);assert.match(inquiryForm,/data-delivery="inactive"/);
+assert.ok(!/\saction=|\sname=|type="submit"/.test(inquiryForm));
+assert.match(inquiryForm,/id="inquiry-check"[^>]*type="button"[^>]*disabled/);
+assert.ok(pricing.includes('Form preview — sending is not available yet.'));
+assert.ok(pricing.includes('This form does not send or save them.'));
+for(const [id,type] of [['name','text'],['organization','text'],['email','email']]) {
+ assert.match(inquiryForm,new RegExp(`<label[^>]*for="inquiry-${id}"`));
+ assert.match(inquiryForm,new RegExp(`<input[^>]*id="inquiry-${id}"[^>]*type="${type}"[^>]*required`));
+ assert.ok(inquiryForm.includes(`id="inquiry-${id}-error"`));
+}
+assert.match(inquiryForm,/<select[^>]*id="inquiry-product"[^>]*required/);
+assert.match(inquiryForm,/<textarea[^>]*id="inquiry-needs"[^>]*required[^>]*minlength="20"[^>]*maxlength="2000"/);
+const mailLinks=[...pricing.matchAll(/href="(mailto:[^"]+)"/g)].map(match=>new URL(match[1].replaceAll('&amp;','&')));
+assert.equal(mailLinks.length,4);
+for(const mail of mailLinks) assert.equal(mail.pathname,publicContactEmail);
+assert.ok(!pricing.includes('taponte'+'@getledovia.com'));
+assert.equal((pricing.match(/>Planned</g)||[]).length,2);
+assert.equal((pricing.match(/Contact for Pricing — Planned Offering/g)||[]).length,2);
+assert.ok(pricing.includes('Every Adventure'));
+assert.ok(pricing.includes('Proposed package direction'));
+console.log('PASS inquiry validation: required fields, trimming, email format, invalid product, length boundaries; 4 mailto links target approved address and product-specific subjects.');
 assert.ok(!(await readdir(root)).includes('CNAME'));
-console.log('PASS pricing content: conspicuous illustrative labels, disabled no-JS selector fallback, seven qualified comparison rows, Planned professional sections, no purchase controls.');
-console.log(`PASS ${live?'LIVE HTTP + exact built bytes':'STATIC'}: ${routes.length} pages, ${links} link/asset references, ${resources.size} unique resources; base paths, fragments, metadata, landmarks, no forms/storage/CNAME.`);
+console.log('PASS pricing content: illustrative labels, selector fallback, seven comparison rows, Planned professional cards; only an inactive local-validation form, no purchase controls.');
+console.log(`PASS ${live?'LIVE HTTP + exact built bytes':'STATIC'}: ${routes.length} pages, ${links} link/asset references, ${resources.size} unique resources; base paths, fragments, metadata, landmarks, inactive inquiry form only; no storage/CNAME.`);

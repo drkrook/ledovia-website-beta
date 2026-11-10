@@ -1,0 +1,57 @@
+<section class="inquiry-form-panel" aria-labelledby="inquiry-form-title">
+ <p class="eyebrow">OPTION A / REQUEST INFORMATION &amp; PRICING</p>
+ <h3 id="inquiry-form-title">Start a conversation.</h3>
+ <div class="delivery-notice" id="inquiry-delivery"><strong>Form preview — sending is not available yet.</strong><p>You can check your details locally. This form does not send or save them. Use the direct email options to contact Ledovia.</p></div>
+ <!-- No action, named controls, or submit button: no endpoint receives draft data. -->
+ <form id="professional-inquiry" data-delivery="inactive" aria-describedby="inquiry-delivery inquiry-privacy" autocomplete="off">
+  <div class="form-row"><div class="field"><label for="inquiry-name">Name <span>(required)</span></label><input id="inquiry-name" type="text" required minlength="2" maxlength="100" aria-describedby="inquiry-name-error"/><p class="field-error" id="inquiry-name-error"></p></div><div class="field"><label for="inquiry-organization">Organization <span>(required)</span></label><input id="inquiry-organization" type="text" required minlength="2" maxlength="100" aria-describedby="inquiry-organization-error"/><p class="field-error" id="inquiry-organization-error"></p></div></div>
+  <div class="field"><label for="inquiry-email">Email <span>(required)</span></label><input id="inquiry-email" type="email" required maxlength="254" aria-describedby="inquiry-email-error"/><p class="field-error" id="inquiry-email-error"></p></div>
+  <div class="field"><label for="inquiry-product">Product interest <span>(required)</span></label><select id="inquiry-product" required aria-describedby="inquiry-product-error"><option value="">Choose a planned offering</option><option value="response">Ledovia Response</option><option value="government">Ledovia Government</option></select><p class="field-error" id="inquiry-product-error"></p></div>
+  <div class="field"><label for="inquiry-needs">Brief description of needs <span>(required)</span></label><textarea id="inquiry-needs" required minlength="20" maxlength="2000" rows="5" aria-describedby="inquiry-needs-hint inquiry-needs-error"></textarea><p class="field-hint" id="inquiry-needs-hint">20–2,000 characters. A high-level description is enough.</p><p class="field-error" id="inquiry-needs-error"></p></div>
+  <p class="privacy-note" id="inquiry-privacy">Keep descriptions general. Do not enter personal records, precise sensitive locations, credentials, or confidential operational information. This website does not transmit or store this draft. Direct email uses your email provider and sends only when you choose to send it.</p>
+  <button class="button" id="inquiry-check" type="button" disabled>Check details locally <span aria-hidden="true">↗</span></button><p class="form-feedback" id="inquiry-feedback" role="status" aria-live="polite">No message has been sent.</p>
+  <noscript><p class="privacy-note">Local validation requires JavaScript. Sending remains unavailable; please use a direct email link.</p></noscript>
+ </form>
+</section>
+<script>
+import {validateInquiryDraft,type InquiryDraft} from '../lib/professional-inquiries';
+const form=document.querySelector<HTMLFormElement>('#professional-inquiry');
+const check=document.querySelector<HTMLButtonElement>('#inquiry-check');
+const feedback=document.querySelector<HTMLElement>('#inquiry-feedback');
+const fields=['name','organization','email','product','needs'] as const;
+if(form && check) {
+ form.addEventListener('submit',event=>event.preventDefault());
+ check.disabled=false;
+ const control=(key:typeof fields[number])=>document.getElementById(`inquiry-${key}`) as HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement;
+ for(const key of fields) {
+  control(key).addEventListener('input',()=>{
+   control(key).setCustomValidity('');control(key).removeAttribute('aria-invalid');
+   const error=document.getElementById(`inquiry-${key}-error`);if(error) error.textContent='';
+   if(feedback) feedback.textContent='Draft changed. Nothing has been sent or saved.';
+  });
+ }
+ check.addEventListener('click',()=>{
+  const draft=Object.fromEntries(fields.map(key=>[key,control(key).value])) as unknown as InquiryDraft;
+  const errors=validateInquiryDraft(draft);
+  for(const key of fields) {
+   const message=errors[key]??'';control(key).setCustomValidity(message);
+   if(message) control(key).setAttribute('aria-invalid','true');else control(key).removeAttribute('aria-invalid');
+   const error=document.getElementById(`inquiry-${key}-error`);if(error) error.textContent=message;
+  }
+  const valid=form.reportValidity();
+  if(feedback) feedback.textContent=valid?'Details look ready. Nothing has been sent. Use a direct email link to contact Ledovia.':'Please review the highlighted fields. Nothing has been sent.';
+ });
+}
+</script>
+<style>
+.inquiry-form-panel{background:var(--white);border:1px solid var(--line);padding:34px;border-radius:4px;min-width:0}
+h3{font-size:2rem}.eyebrow{font-size:.61rem;letter-spacing:.12em;margin-bottom:18px}
+.delivery-notice{background:var(--mist);padding:18px;border-left:3px solid var(--amber);font-size:.84rem;margin-bottom:26px}.delivery-notice p{margin:8px 0 0}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}.field{margin-bottom:18px;min-width:0}
+label{display:block;font-weight:650;font-size:.85rem;margin-bottom:7px}label span{font-weight:400;font-size:.73rem}
+input,select,textarea{display:block;width:100%;max-width:100%;min-width:0;padding:12px 13px;min-height:48px;border:1px solid var(--trail);border-radius:3px;background:var(--white);color:var(--night);font:inherit;font-size:1rem;box-sizing:border-box}textarea{resize:vertical;line-height:1.6}
+input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--trail);outline-offset:3px}
+[aria-invalid="true"]{border:2px solid var(--expedition)}.field-error{font-size:.78rem;font-weight:650;line-height:1.6;margin:6px 0 0}.field-error:empty{display:none}.field-hint,.privacy-note{font-size:.75rem;line-height:1.8;margin:7px 0 0}.privacy-note{margin:22px 0}
+button{font-family:inherit;cursor:pointer}button:focus-visible{outline:3px solid var(--trail);outline-offset:4px}button:disabled{opacity:.65;cursor:default}.form-feedback{font-size:.8rem;margin:14px 0 0}
+@media(max-width:650px){.inquiry-form-panel{padding:24px}.form-row{grid-template-columns:1fr;gap:0}h3{font-size:1.65rem}.eyebrow{font-size:.57rem}}
+</style>
