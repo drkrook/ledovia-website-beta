@@ -1,0 +1,86 @@
+{
+  "mission": "V1.7A.2",
+  "verified_date": "2026-11-10",
+  "license": "Pexels License",
+  "license_url": "https://www.pexels.com/license/",
+  "use": "Illustrative package photography only. No customer, agency, vehicle manufacturer or other affiliation/endorsement implied. No generated mockup is used.",
+  "processing": "Locally resized to 480/800px widths and WebP encoded at quality 80 using the already-installed Sharp dependency. CSS crops at display time; no generative modification.",
+  "assets": [
+    {
+      "package": "travel",
+      "photographer": "Asad Photo Maldives",
+      "source_page": "https://www.pexels.com/photo/aerial-view-of-tropical-island-surrounded-by-turquoise-waters-28408412/",
+      "downloaded_rendition": "https://images.pexels.com/photos/28408412/pexels-photo-28408412.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "source_sha256": "8c64c23d42fae55901319cfca06cc5ffd107b486f9329cea9402154827404b76",
+      "exports": [
+        {
+          "path": "public/images/pricing/cards/travel-480.webp",
+          "bytes": 13502,
+          "sha256": "d7b9c62c5251ce3bd08b9670064a958f59f3eed8f68d99982b73787579c269a5"
+        },
+        {
+          "path": "public/images/pricing/cards/travel-800.webp",
+          "bytes": 35440,
+          "sha256": "b71ca7c1df752a10a292bcdc676f6f2050218c2ad0fb69e156672bb298966f6e"
+        }
+      ]
+    },
+    {
+      "package": "survival",
+      "photographer": "Nathan Moore",
+      "source_page": "https://www.pexels.com/photo/tent-near-tree-2603681/",
+      "downloaded_rendition": "https://images.pexels.com/photos/2603681/pexels-photo-2603681.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "source_sha256": "4c9e9164156c24afac09e8d3265cdeac694bf32ffb8d2bb0114a16c37998a4a4",
+      "exports": [
+        {
+          "path": "public/images/pricing/cards/survival-480.webp",
+          "bytes": 33562,
+          "sha256": "184f57825f5fad42f6c6b104f7f39e92452566be040f577a95187699810d7a79"
+        },
+        {
+          "path": "public/images/pricing/cards/survival-800.webp",
+          "bytes": 86952,
+          "sha256": "42c06fad19335a4893ebfd8a926ee17120c9cc0139db234ca958444a7d5556c7"
+        }
+      ]
+    },
+    {
+      "package": "response",
+      "photographer": "Jacob Moore",
+      "source_page": "https://www.pexels.com/photo/jeep-wrangler-driving-on-an-unpaved-road-in-a-forest-in-mountains-14425502/",
+      "downloaded_rendition": "https://images.pexels.com/photos/14425502/pexels-photo-14425502.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "source_sha256": "ef628dd66901a9e92b1fead384c347cedf115d2ec131de8331e074f3ccd48aef",
+      "exports": [
+        {
+          "path": "public/images/pricing/cards/response-480.webp",
+          "bytes": 52814,
+          "sha256": "23eae9ceaf7908f25034d11582404a27c426eea8227303192d4402844599c89d"
+        },
+        {
+          "path": "public/images/pricing/cards/response-800.webp",
+          "bytes": 145148,
+          "sha256": "cfb29caa123f6dcd6bd5fd8c8af20bfb5d2afca90653e6da57845e43f0299a06"
+        }
+      ]
+    },
+    {
+      "package": "government",
+      "photographer": "Mehmet Suat Gunerli",
+      "source_page": "https://www.pexels.com/photo/photo-of-a-government-building-5187310/",
+      "downloaded_rendition": "https://images.pexels.com/photos/5187310/pexels-photo-5187310.png?auto=compress&cs=tinysrgb&w=1600&fm=jpg",
+      "source_sha256": "1c6c463aab7dd37e9d39bcc30cd92ee9a224d7ef58ca285e5b3d31ce67552415",
+      "exports": [
+        {
+          "path": "public/images/pricing/cards/government-480.webp",
+          "bytes": 48692,
+          "sha256": "0eeea895c5774b428214c84f32787057be0ec7668b7bd419a5c20b324d0a1d55"
+        },
+        {
+          "path": "public/images/pricing/cards/government-800.webp",
+          "bytes": 114466,
+          "sha256": "49af949980ea0eba1ea8fd2d37121a2e519632705293477843fedb488e41c684"
+        }
+      ]
+    }
+  ]
+}
