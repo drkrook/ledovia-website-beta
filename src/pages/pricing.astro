@@ -1,0 +1,110 @@
+---
+import Site from '../layouts/Site.astro';
+import {getPriceExample} from '../lib/illustrative-pricing';
+const travelExample = getPriceExample('travel', 'monthly');
+const survivalExample = getPriceExample('survival', 'monthly');
+const shared = [
+ {feature:'Mapping',detail:'A map viewer with map and resource layers.',qualification:'Layer coverage and third-party data availability vary.'},
+ {feature:'Resource-location information',detail:'Display available resource-location markers and details.',qualification:'Third-party records do not confirm safe access, potable water, or emergency-care availability.'},
+ {feature:'GPS positioning',detail:'Show a device-provided position on the map.',qualification:'Requires permission and compatible device/browser support.'},
+ {feature:'Saved places',detail:'Save locations and bookmarks locally.',qualification:'Entries stay in the current browser; automatic cloud synchronization is not included.'},
+ {feature:'Offline preparation',detail:'Download selected map areas and inspect saved coverage.',qualification:'Prepare online first. Missing areas or zoom levels may be unavailable offline.'},
+];
+const questions = [
+ {question:'Can I buy a package today?',answer:'No. Both packages are in development. Displayed prices and billing periods are illustrative Beta examples; commercial pricing and final package contents are not approved. There is no checkout, subscription activation, or free trial on this website.'},
+ {question:'What does “source-confirmed” mean?',answer:'The underlying app source contains these implementations. This is not a claim of verified device compatibility, field reliability, or a finished paid product. Physical-device and offline acceptance testing is still required.'},
+ {question:'What must I do before going offline?',answer:'Download the relevant map area and other required data while connected, inspect coverage, and test the intended area offline on your own device. Offline map imagery, resource data, and routing data are separate. Map downloads do not guarantee offline turn-by-turn directions or current road conditions.'},
+ {question:'Where are saved places and preparedness entries stored?',answer:'These app features use local browser storage. Data does not automatically synchronize across devices and may be lost if browser data is cleared or storage is evicted. Use the relevant export tools for backups; do not assume every export includes every dataset or is encrypted.'},
+ {question:'Are Response and Government products available?',answer:'No. These are planned professional product directions. Inquiry messaging is provided on this page, but a functioning contact destination has not yet been confirmed. No operational service, delivery date, or commercial commitment is offered.'},
+];
+---
+<Site title="Pricing & Packages" description="Compare Ledovia Travel and Ledovia Survival product directions. Consumer prices are illustrative Beta examples only; purchases are unavailable and professional capabilities are planned.">
+ <div class="pricing-page">
+  <section class="container pricing-intro" aria-labelledby="pricing-title">
+   <p class="eyebrow">YOUR JOURNEY. YOUR WAY FORWARD.</p>
+   <h1 id="pricing-title">Pricing &amp; Packages</h1>
+   <p class="intro-copy">Find the Ledovia direction that fits your journey—from places worth discovering to preparation for the unexpected.</p>
+   <div class="availability-note"><strong>BETA PREVIEW — ILLUSTRATIVE PRICING ONLY</strong><p id="illustrative-disclaimer">Prices, billing periods, package features, and availability are examples for evaluation and may change before launch. Subscriptions and purchases are not currently available.</p></div>
+  </section>
+
+  <section class="container pricing-section" aria-labelledby="consumer-title">
+   <div class="section-lead"><p class="eyebrow">TWO DIRECTIONS. A SHARED FOUNDATION.</p><h2 id="consumer-title">Travel farther.<br/>Prepare thoughtfully.</h2><p>Both product directions build on the same underlying mapping and preparation tools. The examples below are for visual evaluation, not an offer to purchase.</p></div>
+   <fieldset class="billing-selector" id="billing-selector" aria-describedby="illustrative-disclaimer" disabled><legend>Illustrative billing period</legend><label><input type="radio" name="illustrative-billing" value="monthly" checked/><span>Monthly</span></label><label><input type="radio" name="illustrative-billing" value="annual"/><span>Annual</span></label></fieldset><p class="billing-status" id="billing-status" role="status" aria-live="polite" aria-atomic="true">Showing illustrative monthly prices for both packages.</p><noscript><p class="package-note">Monthly examples are shown. Enable JavaScript to compare annual examples; no subscriptions or purchases are available.</p></noscript>
+   <div class="package-grid">
+    <article class="package-card" aria-labelledby="travel-title"><span class="badge">In development</span><h3 id="travel-title">Ledovia Travel</h3><p class="price-label">Illustrative Beta price</p><p class="package-price"><span data-example-price="travel">{travelExample.amount}</span> <span class="price-period" data-price-period>{travelExample.suffix}</span></p><p>For family journeys, road trips, and places you want to remember.</p><div class="direction"><h4>Proposed product direction</h4><p>A travel-focused experience built around map exploration, saved destinations, and preparing selected areas before a trip.</p></div><p class="package-note">Illustrative pricing only. Specialization is proposed; no exclusive paid features, limits, or subscriptions are confirmed.</p></article>
+    <article class="package-card" aria-labelledby="survival-title"><span class="badge">In development</span><h3 id="survival-title">Ledovia Survival</h3><p class="price-label">Illustrative Beta price</p><p class="package-price"><span data-example-price="survival">{survivalExample.amount}</span> <span class="price-period" data-price-period>{survivalExample.suffix}</span></p><p>For outdoor exploration, practical readiness, and personal preparedness.</p><div class="direction"><h4>Proposed product direction</h4><p>A preparedness-focused experience drawing on the app’s checklist tools and local hazard-reporting implementations alongside the shared foundation.</p></div><p class="package-note">Illustrative pricing only. Package inclusion is undecided. These implementations do not establish an operational emergency service.</p></article>
+   </div>
+  </section>
+
+  <section class="container pricing-section" aria-labelledby="comparison-title">
+   <div class="section-lead"><p class="eyebrow">WHAT THE FOUNDATION CONTAINS</p><h2 id="comparison-title">Compare the common ground.</h2><p id="comparison-note">The rows below identify source-confirmed app implementations. “Common foundation” describes the shared product direction, not a purchased entitlement or a field-tested guarantee.</p></div>
+   <table aria-describedby="comparison-note"><caption>Source-confirmed foundation for the proposed consumer packages</caption><colgroup><col class="feature-column"/><col/><col/></colgroup><thead><tr><th scope="col">Capability</th><th scope="col">Ledovia Travel</th><th scope="col">Ledovia Survival</th></tr></thead><tbody>{shared.map(row=><tr><th scope="row">{row.feature}<span>{row.detail}</span></th><td>Common foundation</td><td>Common foundation</td></tr>)}<tr class="proposed-row"><th scope="row">Proposed Travel specialization<span>Package direction only; not a confirmed paid entitlement.</span></th><td>Travel-focused map exploration, saved destinations, and trip-area preparation.</td><td>Allocation not finalized.</td></tr><tr class="proposed-row"><th scope="row">Proposed Survival specialization<span>Package direction only; not a confirmed paid entitlement.</span></th><td>Allocation not finalized.</td><td>Preparedness-focused checklists and local hazard reporting.</td></tr></tbody></table>
+   <div class="comparison-details"><h3>What these capabilities depend on</h3><ul>{shared.map(row=><li><strong>{row.feature}:</strong> {row.qualification}</li>)}</ul><p>Resource markers do not verify safe access, potable water, emergency-care availability, or current conditions. Preparedness content is not a substitute for official instructions or appropriate emergency services.</p></div>
+   <details class="source-note"><summary>Implementation sources and limits</summary><p>The comparison draws from the underlying app’s <a href="https://github.com/drkrook/silent-compass-family-beta/blob/4114ed1f3b3f72fff3724b8fb671b9d228333cf0/index.html">map and saved-place source</a>, <a href="https://github.com/drkrook/silent-compass-family-beta/blob/4114ed1f3b3f72fff3724b8fb671b9d228333cf0/package-manager.js">coverage and package tools</a>, <a href="https://github.com/drkrook/silent-compass-family-beta/blob/4114ed1f3b3f72fff3724b8fb671b9d228333cf0/survival-hub.js">preparedness checklists</a>, and <a href="https://github.com/drkrook/silent-compass-family-beta/blob/4114ed1f3b3f72fff3724b8fb671b9d228333cf0/hazard-safety.js">local hazard reports</a>. These references establish code presence, not release acceptance or package availability.</p></details>
+   <p class="planned-note"><strong>Outside the current offer:</strong> complete offline training libraries, cloud family coordination, statewide vector packages, and professional workflows remain planned or unverified. They are not promised package benefits.</p>
+  </section>
+
+  <section class="professional-section" aria-labelledby="professional-title"><div class="container"><div class="section-lead"><p class="eyebrow">FOR ORGANIZATIONS WITH A DIFFERENT MISSION</p><h2 id="professional-title">Professional directions.</h2><p>Separate conversations for business teams and public-sector agencies. Professional capabilities are in development. These are planned product directions, not available services.</p></div><div class="professional-grid">
+   <article class="professional-card"><span class="planned-badge">Planned</span><h3>Ledovia Response</h3><p>For business and field teams exploring future mapping, documentation, and preparedness needs.</p><h4>Contact Us</h4><p class="contact-explanation">Contact Us will be the future inquiry path. A functioning contact destination has not yet been confirmed.</p></article>
+   <article class="professional-card"><span class="planned-badge">Planned</span><h3>Ledovia Government</h3><p>For public-sector agencies exploring future operational mapping and coordination needs.</p><h4>Contact Us</h4><p class="contact-explanation">Contact Us will be the future inquiry path. A functioning contact destination has not yet been confirmed.</p></article>
+  </div></div></section>
+
+  <section class="container pricing-section faq-section" aria-labelledby="faq-title"><p class="eyebrow">A CLEAR VIEW BEFORE YOU GO</p><h2 id="faq-title">Questions, answered.</h2><div class="faq-list">{questions.map(({question,answer})=><details><summary>{question}</summary><p>{answer}</p></details>)}</div><p class="closing-tagline">Ready for the Adventure. Prepared for the Unexpected.</p></section>
+ </div>
+</Site>
+<script>
+import {getPriceExample, type BillingPeriod} from '../lib/illustrative-pricing';
+const selector=document.querySelector<HTMLFieldSetElement>('#billing-selector');
+const status=document.querySelector<HTMLElement>('#billing-status');
+function displayPeriod(period: BillingPeriod) {
+ document.querySelectorAll<HTMLElement>('[data-example-price]').forEach(output=>{
+  const plan=output.dataset.examplePrice;
+  if(plan!=='travel' && plan!=='survival') return;
+  const price=getPriceExample(plan,period);
+  output.textContent=price.amount;
+  const suffix=output.closest('.package-price')?.querySelector<HTMLElement>('[data-price-period]');
+  if(suffix) suffix.textContent=price.suffix;
+ });
+ if(status) status.textContent=`Showing illustrative ${period} prices for both packages. Subscriptions are not available.`;
+}
+function syncPeriod() {
+ const selected=selector?.querySelector<HTMLInputElement>('input:checked');
+ displayPeriod(selected?.value==='annual'?'annual':'monthly');
+}
+if(selector) {
+ selector.addEventListener('change',syncPeriod);
+ selector.disabled=false;
+ syncPeriod();
+ window.addEventListener('pageshow',syncPeriod);
+}
+</script>
+<style>
+.pricing-intro{padding-block:90px 44px}.pricing-intro h1{font-size:clamp(2.7rem,5.5vw,5rem)}
+.intro-copy{max-width:690px;font-size:1.08rem}.availability-note{max-width:850px;margin-top:32px;padding:22px 26px;border-left:4px solid var(--amber);background:var(--white)}
+.availability-note strong{font-size:.9rem}.availability-note p{font-size:.88rem;margin:7px 0 0}
+.pricing-section{padding-block:44px 64px}.section-lead{max-width:820px;margin-bottom:32px}.section-lead>p:not(.eyebrow){max-width:720px}.section-lead .eyebrow{margin-bottom:18px}
+.package-grid,.professional-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.package-card{background:var(--white);border:1px solid var(--line);border-top:3px solid var(--trail);border-radius:3px;padding:34px;min-width:0}
+.package-card .badge{display:inline-block;margin-bottom:24px}.package-card h3{font-size:2rem;margin-bottom:14px}.package-price{font-size:1.9rem;font-weight:700;line-height:1.3;margin-bottom:22px}
+.package-card>p:not(.package-price):not(.price-label){font-size:.94rem}.direction{border-top:1px solid var(--line);padding-top:22px;margin-top:26px}.direction h4{font-size:.85rem;margin:0 0 10px}.direction p{font-size:.91rem}.package-card .package-note{font-size:.78rem!important;margin:22px 0 0}
+.billing-selector{display:flex;flex-wrap:wrap;gap:10px;border:0;padding:0;margin:0 0 10px;min-width:0}
+.billing-selector legend{font-size:.82rem;font-weight:700;margin-bottom:10px}
+.billing-selector label{display:flex;align-items:center;gap:10px;min-height:48px;padding:11px 18px;border:1px solid var(--trail);border-radius:3px;background:var(--white);cursor:pointer;font-size:.88rem;font-weight:650}
+.billing-selector label:has(input:checked){background:var(--expedition);color:var(--frost)}
+.billing-selector:disabled label{cursor:default}
+.billing-selector input{width:18px;height:18px;margin:0;accent-color:var(--trail)}
+.billing-selector input:focus-visible{outline:3px solid var(--amber);outline-offset:4px}
+.billing-selector label:has(input:focus-visible){outline:3px solid var(--trail);outline-offset:4px}
+.billing-status{font-size:.8rem;margin:0 0 28px;max-width:700px}
+.package-card .price-label{font-size:.67rem;font-weight:750;letter-spacing:.08em;text-transform:uppercase;margin:0 0 6px}
+.price-period{font-size:.95rem;font-weight:500;white-space:nowrap}
+.proposed-row{background:var(--mist)}
+ table{width:100%;border-collapse:collapse;table-layout:fixed;background:var(--white);font-size:.9rem;overflow-wrap:anywhere}.feature-column{width:48%}
+ caption{text-align:left;font-size:.79rem;padding-bottom:14px}th,td{padding:20px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+ thead{background:var(--expedition);color:var(--frost)}thead th{font-weight:650}tbody th{font-weight:700}tbody th span{display:block;font-weight:400;font-size:.83rem;line-height:1.65;margin-top:7px}
+.comparison-details{margin-top:30px;font-size:.87rem}.comparison-details h3{font-size:1.3rem}.comparison-details ul{padding-left:22px}.comparison-details li{margin-bottom:10px}.comparison-details>p{max-width:850px}
+.source-note{font-size:.82rem;padding-block:16px;border-block:1px solid var(--line)}summary{cursor:pointer;padding:12px 3px;min-height:44px;font-weight:650;line-height:1.6}.source-note p{margin:14px 0 6px;max-width:850px}.source-note a{text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}.planned-note{font-size:.85rem;max-width:850px;margin:24px 0 0}
+.professional-section{padding-block:70px;background:var(--expedition);color:var(--frost)}.professional-section .eyebrow{color:var(--amber)}.professional-card{border:1px solid var(--frost);border-radius:3px;background:var(--field);padding:32px;min-width:0}.planned-badge{display:inline-block;background:var(--amber);color:var(--night);padding:4px 10px;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;font-weight:750;margin-bottom:24px}.professional-card h3{font-size:1.8rem}.professional-card p{font-size:.92rem}.professional-card h4{font-size:1rem;margin:28px 0 8px}.professional-card .contact-explanation{font-size:.8rem;margin-bottom:0}
+.faq-section{padding-block:80px}.faq-list{max-width:900px}.faq-list details{border-bottom:1px solid var(--line);padding-block:8px}.faq-list p{font-size:.92rem;padding:10px 3px 8px;max-width:820px}.closing-tagline{margin:48px 0 0;font-family:Georgia,serif;font-style:italic;font-size:1.1rem}
+@media(max-width:650px){.pricing-intro{padding-block:58px 28px}.pricing-section{padding-block:30px 44px}.package-grid,.professional-grid{grid-template-columns:1fr;gap:20px}.package-card,.professional-card{padding:26px}.availability-note{padding:18px}.intro-copy{font-size:1rem}.package-card h3{font-size:1.8rem}.professional-section{padding-block:52px}.faq-section{padding-block:54px}table{font-size:.76rem}th,td{padding:14px 9px}tbody th span{font-size:.74rem}.feature-column{width:44%}caption{font-size:.75rem}.section-lead h2{font-size:2.05rem}}
+</style>

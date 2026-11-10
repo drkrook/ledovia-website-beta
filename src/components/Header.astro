@@ -1,6 +1,6 @@
 ---
 import {url} from '../lib/paths';
-const links=[['Solutions',url('#solutions')],['How it works',url('how-it-works/')],['Our story',url('about/')],['Get in touch',url('contact/')]];
+const links=[['Solutions',url('#solutions')],['How it works',url('how-it-works/')],['Pricing',url('pricing/')],['Our story',url('about/')],['Get in touch',url('contact/')]];
 ---
 <header><div class="container header-inner"><a class="brand" href={url()} aria-label="Ledovia home"><img src={url('brand/ledovia-logo-teal.svg')} alt="LEDOVIA" width="400" height="240" fetchpriority="high"/></a><nav aria-label="Main navigation"><div class="desktop-nav">{links.map(([label,href])=><a class:list={{'nav-cta':label==='Get in touch'}} href={href}>{label}{label==='Get in touch' && <span aria-hidden="true"> ↗</span>}</a>)}</div><details class="mobile-nav"><summary>Menu <span aria-hidden="true">＋</span></summary><div class="mobile-links">{links.map(([label,href])=><a href={href}>{label}</a>)}</div></details></nav></div></header>
 <script>
@@ -8,3 +8,15 @@ const menu=document.querySelector<HTMLDetailsElement>('.mobile-nav');
 menu?.addEventListener('keydown',event=>{if(event.key==='Escape'){menu.open=false;menu.querySelector('summary')?.focus();}});
 menu?.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{menu.open=false;}));
 </script>
+
+<style>
+/* The extra navigation item uses the existing menu pattern on narrow tablets. */
+@media (min-width:651px) and (max-width:800px) {
+ .desktop-nav{display:none}
+ .mobile-nav{display:block;position:relative}
+ .mobile-nav summary{cursor:pointer;list-style:none;padding:12px 6px;font-size:.85rem;min-height:44px}
+ .mobile-nav summary::-webkit-details-marker{display:none}
+ .mobile-links{position:absolute;right:0;top:48px;z-index:5;width:230px;padding:14px 20px;background:var(--mist);border:1px solid var(--trail);box-shadow:0 12px 24px rgb(7 25 28 / .18);display:flex;flex-direction:column}
+ .mobile-links a{padding:12px 0;min-height:44px;font-size:.85rem}
+}
+</style>

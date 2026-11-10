@@ -5,8 +5,18 @@ import {createHash} from 'node:crypto';
 const root=path.resolve('dist');
 const origin='https://drkrook.github.io';
 const base='/ledovia-website-beta/';
-const routes=['','solutions/travel/','solutions/outdoors/','solutions/response/','solutions/government/','how-it-works/','about/','contact/','404.html'];
+const routes=['','solutions/travel/','solutions/outdoors/','solutions/response/','solutions/government/','how-it-works/','about/','contact/','pricing/','404.html'];
 const live=process.argv.includes('--live');
+const {getPriceExample}=await import('../src/lib/illustrative-pricing.ts');
+for(const [period,travel,survival,suffix] of [
+ ['monthly','$4.99','$7.99','/ month'],
+ ['annual','$49.99','$79.99','/ year'],
+ ['monthly','$4.99','$7.99','/ month'],
+]) {
+ assert.deepEqual(getPriceExample('travel',period),{amount:travel,suffix});
+ assert.deepEqual(getPriceExample('survival',period),{amount:survival,suffix});
+}
+console.log('PASS selector price logic: monthly → annual → monthly; exact owner-supplied amounts and billing labels.');
 const resources=new Set();
 let links=0;
 for(const route of routes){
@@ -86,5 +96,24 @@ if(live){
   }
  }
 }
+const pricing=await readFile(path.join(root,'pricing/index.html'),'utf8');
+assert.ok(pricing.includes('BETA PREVIEW — ILLUSTRATIVE PRICING ONLY'));
+assert.ok(pricing.includes('Prices, billing periods, package features, and availability are examples for evaluation and may change before launch. Subscriptions and purchases are not currently available.'));
+assert.equal((pricing.match(/>Illustrative Beta price</g)||[]).length,2);
+assert.match(pricing, /data-example-price="travel"[^>]*>\$4\.99</);
+assert.match(pricing, /data-example-price="survival"[^>]*>\$7\.99</);
+assert.match(pricing,/<fieldset[^>]*id="billing-selector"[^>]*disabled/);
+assert.match(pricing,/<input[^>]*name="illustrative-billing"[^>]*value="monthly"[^>]*checked/);
+assert.match(pricing,/<input[^>]*name="illustrative-billing"[^>]*value="annual"/);
+assert.match(pricing,/id="billing-status"[^>]*role="status"/);
+assert.ok(pricing.includes('Enable JavaScript to compare annual examples'));
+assert.equal((pricing.match(/scope="row"/g)||[]).length,7);
+assert.ok(!/<form|<iframe|<video|<button/i.test(pricing));
+assert.ok(!/href="(?:mailto:|tel:|[^"]*(?:checkout|subscribe|purchase))/i.test(pricing));
+const professional=pricing.slice(pricing.indexOf('<section class="professional-section'),pricing.indexOf('<section class="container pricing-section faq-section'));
+assert.equal((professional.match(/>Planned</g)||[]).length,2);
+assert.equal((professional.match(/>Contact Us</g)||[]).length,2);
+assert.ok(!/<a\s|<button/.test(professional));
 assert.ok(!(await readdir(root)).includes('CNAME'));
+console.log('PASS pricing content: conspicuous illustrative labels, disabled no-JS selector fallback, seven qualified comparison rows, Planned professional sections, no purchase controls.');
 console.log(`PASS ${live?'LIVE HTTP + exact built bytes':'STATIC'}: ${routes.length} pages, ${links} link/asset references, ${resources.size} unique resources; base paths, fragments, metadata, landmarks, no forms/storage/CNAME.`);
