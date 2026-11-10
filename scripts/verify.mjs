@@ -29,6 +29,16 @@ for(const route of routes){
   if(parsed.hash){const dest=await readFile(target,'utf8');assert.ok(dest.includes(`id="${parsed.hash.slice(1)}"`),`Missing fragment ${href}`)}
   resources.add(parsed.pathname); links++;
  }
+ for(const [,srcset] of html.matchAll(/srcset="([^"]+)"/g)) {
+  for(const candidate of srcset.split(',')) {
+   const [asset,descriptor]=candidate.trim().split(/\s+/);
+   assert.match(descriptor,/^\d+w$/);
+   const parsed=new URL(asset,origin+base+route);
+   assert.ok(parsed.pathname.startsWith(base),`Srcset base escape: ${asset}`);
+   assert.ok((await stat(path.join(root,parsed.pathname.slice(base.length)))).isFile(),`Missing srcset asset: ${asset}`);
+   resources.add(parsed.pathname);links++;
+  }
+ }
  if(live){
   const response=await fetch(origin+base+route,{cache:'no-store'});
   assert.equal(response.status,200,`Live route ${route}`);
@@ -51,6 +61,17 @@ for(const name of await readdir(path.join(root,'_astro'))){
   }
  }
 }
+async function inspectPublic(directory,relative='') {
+ for(const entry of await readdir(directory,{withFileTypes:true})) {
+  const name=path.posix.join(relative,entry.name);
+  if(entry.isDirectory()){await inspectPublic(path.join(directory,entry.name),name);continue;}
+  const source=await readFile(path.join(directory,entry.name));
+  const built=await readFile(path.join(root,name));
+  assert.ok(source.equals(built),`Public asset changed or missing: ${name}`);
+  resources.add(base+name);
+ }
+}
+await inspectPublic('public');
 resources.add(base+'robots.txt');
 if(live){
  for(const resource of resources){

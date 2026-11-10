@@ -22,7 +22,7 @@ Astro uses the `/ledovia-website-beta/` base path in development and production.
 
 ## Scope and design
 
-Astro + TypeScript + lightweight CSS. Shared layout, responsive header with native mobile navigation, homepage, four solution placeholders, minimal About/How it works/Contact placeholders, footer and custom 404. CSS uses the approved Teal/Forest/Gold/Mist/Slate/Ocean palette, Manrope/Inter names with reliable system fallbacks. No externally loaded fonts or assets. SVG landscape, map concept, and favicon are original local illustrations created for this project; imagery is conceptual, not a working product screen.
+Astro + TypeScript + lightweight CSS. Shared layout, responsive header with native mobile navigation, homepage, four solution placeholders, minimal About/How it works/Contact placeholders, footer and custom 404. CSS uses the approved Teal/Forest/Gold/Mist/Slate/Ocean palette, Manrope/Inter names with reliable system fallbacks. No externally loaded fonts or assets. V1.6B preparation uses the exact app emblem, outlined logo lockups, and a locally optimized public-domain Moraine Lake photograph by Gorgo. The original expedition illustration remains available. See docs/ASSET-PROVENANCE.md for sources, license records and export checksums. Imagery and the map concept do not represent a working product screen.
 
 Travel and outdoor capabilities are in development. Professional response and agency capabilities are planned and unavailable. No forms, accounts, payments, browser storage, service workers or application integrations. Beta has noindex metadata and restrictive robots guidance; it is PUBLIC, not private.
 
@@ -35,3 +35,9 @@ The deployed base is not a custom domain. No CNAME or DNS changes are included. 
 ## Verification
 
 `npm run verify` checks nine generated HTML pages, base-prefixed links, fragments, metadata, CSS/JS/SVG assets, no CNAME, and absence of customer forms/storage/service workers. After deployment, `node scripts/verify.mjs --live` checks live routes/resources and compares response bytes with the locally built artifact. This does not prove responsive, keyboard, or assistive-technology behavior. See docs/VALIDATION.md for actual evidence and limitations.
+
+## V1.6B — prepared locally, not published
+
+The working-tree upgrade applies the approved eight-color shared brand palette, exact original app emblem geometry, white/teal logo treatments, transparent PNGs, responsive licensed photography, revised visual hierarchy, card spacing, accessible dark-on-amber buttons, and consistent shared header/footer styling. No route or deployment architecture changes.
+
+See docs/V1.6B-VALIDATION.md for actual checks and browser verification limits. The public Beta URL still serves the last approved V1.5 commit until the owner separately authorizes committing, pushing and deploying V1.6B.

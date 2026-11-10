@@ -1,0 +1,112 @@
+{
+  "continue": {
+    "iistart": "2005-09-22T05:21:44Z",
+    "continue": "||"
+  },
+  "query": {
+    "pages": {
+      "334627": {
+        "pageid": 334627,
+        "ns": 6,
+        "title": "File:Moraine Lake 17092005.jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Moraine_Lake_17092005.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Moraine_Lake_17092005.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=334627",
+            "extmetadata": {
+              "DateTime": {
+                "value": "2006-01-27 12:33:44",
+                "source": "mediawiki-metadata",
+                "hidden": ""
+              },
+              "ObjectName": {
+                "value": "Moraine Lake 17092005",
+                "source": "mediawiki-metadata"
+              },
+              "CommonsMetadataExtension": {
+                "value": 1.2,
+                "source": "extension",
+                "hidden": ""
+              },
+              "Categories": {
+                "value": "Mount Allen (Canadian Rockies)|Taken with Canon PowerShot A70|Images with annotations|Deltaform Mountain|Neptuak Mountain|Mount Tuzo|Self-published work|Commons featured desktop backgrounds|PD-self|Featured pictures of Alberta|Featured pictures on Wikipedia, Azeri|Featured pictures on Wikipedia, Persian|Featured pictures on Wikipedia, Spanish|Featured pictures on Wikipedia, Turkish|Truncated spurs in Canada|Files with coordinates missing SDC location of creation|Forests in Canada in autumn|Canada photographs taken on 2005-09-17|Mountains with snow in Canada|Blue sky in Alberta|Featured photographs in the public domain|September 2005 in Alberta|Horns (landforms) in Alberta|Featured pictures on Wikipedia, Arabic|Picture of the day on the Karachay-Balkar Wikipedia|Forests in Banff National Park|Moraine Lake in 2005|Mount Perren|Spruce forests in Canada|Tonsa|Water reflections of mountains of Alberta",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "Assessments": {
+                "value": "featured|potd",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "GPSLatitude": {
+                "value": "51.327833",
+                "source": "commons-desc-page"
+              },
+              "GPSLongitude": {
+                "value": "-116.179889",
+                "source": "commons-desc-page"
+              },
+              "GPSMapDatum": {
+                "value": "WGS-84",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "ImageDescription": {
+                "value": "Valley of the Ten Peaks and Moraine Lake, Banff National Park, Canada. Mountains from left to right: Tonsa (3057 m), Mount Perren (3051 m), Mount Allen (3310 m), Mount Tuzo (3246 m), Deltaform Mountain (3424 m), Neptuak Mountain (3233 m)",
+                "source": "commons-desc-page"
+              },
+              "DateTimeOriginal": {
+                "value": "17 September 2005",
+                "source": "commons-desc-page"
+              },
+              "Credit": {
+                "value": "Photo taken by author",
+                "source": "commons-desc-page"
+              },
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/User:Gorgo\" title=\"User:Gorgo\">Gorgo</a>",
+                "source": "commons-desc-page"
+              },
+              "Permission": {
+                "value": "Released in Wikimedia Commons under PD by author.",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseShortName": {
+                "value": "Public domain",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "UsageTerms": {
+                "value": "Public domain",
+                "source": "commons-desc-page"
+              },
+              "AttributionRequired": {
+                "value": "false",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "Copyrighted": {
+                "value": "False",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "Restrictions": {
+                "value": "",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "License": {
+                "value": "pd",
+                "source": "commons-templates",
+                "hidden": ""
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
