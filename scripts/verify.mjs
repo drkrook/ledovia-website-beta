@@ -175,6 +175,10 @@ assert.ok(!/fetch\(|XMLHttpRequest|sessionStorage|localStorage/.test(formSource)
 console.log('PASS Contact routes, recognized product preselection and safe fallback, general inquiry, navigation destinations, local-only form safeguards and approved email addresses. Browser interaction unverified.');
 
 const photoManifest=JSON.parse(await readFile('docs/V1.7A.3-ASSET-PROVENANCE.json','utf8'));
+const responseUpdate=JSON.parse(await readFile('docs/V1.7A.4-ASSET-PROVENANCE.json','utf8'));
+assert.equal(responseUpdate.assets.length,1);
+assert.equal(responseUpdate.assets[0].package,'response');
+photoManifest.assets=photoManifest.assets.map(asset=>asset.package==='response'?responseUpdate.assets[0]:asset);
 const {default:sharp}=await import('sharp');
 assert.deepEqual(photoManifest.assets.map(a=>a.package),['response','government']);
 for(const asset of photoManifest.assets){
@@ -191,5 +195,6 @@ for(const asset of photoManifest.assets){
  }
  assert.ok(pricing.includes(asset.source_page));
 }
-assert.ok(pricing.includes('The appearance of U.S. Department of War (DoW) visual information does not imply or constitute DoW endorsement.'));
-console.log('PASS professional photography: four responsive WebP variants decoded, dimensions/bytes/SHA-256 match provenance; source credits and non-endorsement notice present.');
+assert.ok(!/Department of War|dvidshub|USACE|8231203/.test(pricing));
+assert.equal(responseUpdate.assets[0].license,'Pexels License');
+console.log('PASS professional photography: four responsive WebP variants decoded, dimensions/bytes/SHA-256 match provenance; current source credits and no-affiliation notice present.');

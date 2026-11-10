@@ -1,0 +1,53 @@
+{
+  "mission": "V1.7A.4",
+  "verified_date": "2026-11-10",
+  "supersedes": "Response entry of V1.7A.3-ASSET-PROVENANCE.json only. Government and other package imagery unchanged.",
+  "processing": "Crop to 5:4, resize to 480/800px WebP, quality 80 using existing Sharp; no generative edits or watermark removal.",
+  "licensing_evidence": {
+    "source_page_sha256": "c8891493852ae50346b19b59f76b106be9491868b36493d2db5b29c372c903f8",
+    "license_page_sha256": "8e8a442a31dadd42d5564abe0badea1824350f125e2d4e19e885bc3685279a3e",
+    "permissions": "Pexels permits free commercial website/promotional use and modification; attribution optional.",
+    "restrictions": "No implied endorsement, offensive portrayal of identifiable people, unaltered resale, stock-platform redistribution or trademark use.",
+    "previous_disclaimer_removal": "No other runtime source/public asset references DVIDS or USACE. The previous Response image is fully replaced; its exclusive credit and government-image disclaimer are removed from Pricing. Historical provenance remains in docs."
+  },
+  "assets": [
+    {
+      "package": "response",
+      "photographer": "Bijen Amatya",
+      "source_page": "https://www.pexels.com/photo/firefighters-in-action-at-a-disaster-site-36409935/",
+      "downloaded_rendition": "https://images.pexels.com/photos/36409935/pexels-photo-36409935.jpeg?cs=srgb&dl=pexels-bijenamatya-36409935.jpg&fm=jpg",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "source_sha256": "d8090ee1b811c7290f9e3bd8c37e4a6066cc54c629b1ad30cead7936bf0b0704",
+      "source_dimensions": {
+        "width": 4960,
+        "height": 2791
+      },
+      "crop": {
+        "left": 0,
+        "top": 0,
+        "width": 3480,
+        "height": 2784
+      },
+      "observed_content": "Firefighters in helmets and reflective protective clothing handling a hose in a fire-damaged structure; other emergency personnel and media appear in the original. Selected crop emphasizes the firefighting team.",
+      "watermark_check": "Original and exported images inspected visually: no visible stock watermark or overlay. Real uniform insignia are not watermarks.",
+      "use": "Illustrative disaster-response imagery only, not a Ledovia customer, commercial restoration company or endorsement.",
+      "exports": [
+        {
+          "path": "public/images/pricing/cards/response-480.webp",
+          "width": 480,
+          "height": 384,
+          "bytes": 43206,
+          "sha256": "a398c77426a606330b200471a314aa6a92c2804be0d8cb071810f7c9e4d65b43"
+        },
+        {
+          "path": "public/images/pricing/cards/response-800.webp",
+          "width": 800,
+          "height": 640,
+          "bytes": 86070,
+          "sha256": "bf8f993a55344734b39ca225ad2af6aaafa958d2ac5802eee8d6ac67c10e9f44"
+        }
+      ]
+    }
+  ]
+}
