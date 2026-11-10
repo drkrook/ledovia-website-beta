@@ -1,0 +1,6 @@
+---
+import Site from '../layouts/Site.astro';
+import Button from '../components/Button.astro';
+import {url} from '../lib/paths';
+---
+<Site title="Page not found"><section class="container placeholder"><p class="eyebrow">404 / OFF THE TRAIL</p><h1>Let’s find your way back.</h1><p>This page could not be found.</p><Button href={url()}>Return home</Button></section></Site>

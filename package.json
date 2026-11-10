@@ -1,0 +1,1 @@
+{"name":"ledovia-website-beta","version":"1.5.0","private":true,"type":"module","engines":{"node":">=24.22.1"},"scripts":{"dev":"astro dev","check":"astro check","build":"astro build","preview":"astro preview","verify":"node scripts/verify.mjs"},"dependencies":{"astro":"7.4.10"},"devDependencies":{"@astrojs/check":"0.9.12","typescript":"5.9.3"}}

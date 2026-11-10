@@ -1,0 +1,10 @@
+---
+import {url} from '../lib/paths';
+const links=[['Solutions',url('#solutions')],['How it works',url('how-it-works/')],['Our story',url('about/')],['Get in touch',url('contact/')]];
+---
+<header><div class="container header-inner"><a class="brand" href={url()} aria-label="Ledovia home"><svg aria-hidden="true" viewBox="0 0 40 40"><path d="m2 33 17-29 9 16 5-7 7 20H2Zm17-19L9 30h20Z" fill="currentColor"/></svg><span>LEDOVIA</span></a><nav aria-label="Main navigation"><div class="desktop-nav">{links.map(([label,href])=><a class:list={{'nav-cta':label==='Get in touch'}} href={href}>{label}{label==='Get in touch' && <span aria-hidden="true"> ↗</span>}</a>)}</div><details class="mobile-nav"><summary>Menu <span aria-hidden="true">＋</span></summary><div class="mobile-links">{links.map(([label,href])=><a href={href}>{label}</a>)}</div></details></nav></div></header>
+<script>
+const menu=document.querySelector<HTMLDetailsElement>('.mobile-nav');
+menu?.addEventListener('keydown',event=>{if(event.key==='Escape'){menu.open=false;menu.querySelector('summary')?.focus();}});
+menu?.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{menu.open=false;}));
+</script>

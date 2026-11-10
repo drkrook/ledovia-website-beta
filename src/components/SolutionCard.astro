@@ -1,0 +1,6 @@
+---
+import {url} from '../lib/paths';
+interface Props {number:string; title:string; text:string; path:string; status:string;}
+const {number,title,text,path,status}=Astro.props;
+---
+<a class="solution-card" href={url(path)}><span class="card-number">{number}<span aria-hidden="true">↗</span></span><span class="badge">{status}</span><h3>{title}</h3><p>{text}</p><span class="card-link">Explore this path <span aria-hidden="true">→</span></span></a>
