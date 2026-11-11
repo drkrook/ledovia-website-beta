@@ -2,10 +2,10 @@
 import {url} from '../lib/paths';
 ---
 <div class="adventure-film">
- <img class="film-poster" src={url('media/home/adventure-poster-1280.webp')} srcset={`${url('media/home/adventure-poster-640.webp')} 640w, ${url('media/home/adventure-poster-1280.webp')} 1280w`} sizes="(min-width: 901px) 58vw, 100vw" alt="Hikers exploring sunlit rock formations in Cappadocia." width="1280" height="720" fetchpriority="high" decoding="async"/>
- <video id="adventure-film" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" disablepictureinpicture poster={url('media/home/adventure-poster-1280.webp')}>
-  <source data-src={url('media/home/adventure-loop.webm')} type="video/webm"/>
-  <source data-src={url('media/home/adventure-loop.mp4')} type="video/mp4"/>
+ <img class="film-poster" src={url('media/home/adventure-poster-1280.webp?v=1.7b1')} srcset={`${url('media/home/adventure-poster-640.webp?v=1.7b1')} 640w, ${url('media/home/adventure-poster-1280.webp?v=1.7b1')} 1280w`} sizes="(min-width: 901px) 58vw, 100vw" alt="Hikers exploring sunlit rock formations in Cappadocia." width="1280" height="720" fetchpriority="high" decoding="async"/>
+ <video id="adventure-film" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" disablepictureinpicture poster={url('media/home/adventure-poster-1280.webp?v=1.7b1')}>
+  <source data-src={url('media/home/adventure-loop.webm?v=1.7b1')} type="video/webm"/>
+  <source data-src={url('media/home/adventure-loop.mp4?v=1.7b1')} type="video/mp4"/>
  </video>
  <div class="film-caption"><span>OUT THERE IS WHERE IT BEGINS.</span><span>TRAVEL / EXPLORE / PREPARE</span></div>
  <button id="film-toggle" type="button" aria-controls="adventure-film" hidden>Play adventure film</button>

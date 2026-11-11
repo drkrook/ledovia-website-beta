@@ -1,0 +1,98 @@
+{
+  "mission": "V1.7B.1",
+  "verified_date": "2026-11-10",
+  "supersedes": "V1.7B homepage film exports and source selection only; historical record retained. Existing solution photography unchanged.",
+  "license": "Pexels License",
+  "license_url": "https://www.pexels.com/license/",
+  "license_page_sha256": "8e8a442a31dadd42d5564abe0badea1824350f125e2d4e19e885bc3685279a3e",
+  "permissions": "Free commercial website and promotional use; modification permitted; attribution optional and supplied.",
+  "restrictions": "No implied endorsement, offensive portrayal of identifiable people, unaltered resale, stock-platform redistribution, or trademark use.",
+  "processing": "Three actual active-adventure clips, 10s each, joined with 0.5s crossfades including return to the opening shot; opening overlap trimmed for approximately 28.5s loop. H.264 fast-start MP4 CRF28 / VP9 WebM CRF41, 1280\u00d7720 at 24fps. Audio removed. Consistent WebP posters extracted from final film. Existing poster-only policy on mobile/reduced motion/Save-Data preserved.",
+  "inspection": "Original new hiking clip sampled at 1/4/7s: family walking/running down a grassy hillside toward a trail shelter, no passive campsite scene or visible watermark. Retained mountain/forest walking clips previously inspected; final film exports reviewed separately.",
+  "removed_scene": {
+    "id": 9210957,
+    "description": "Passive campfire/campsite scene completely removed from film and current on-page credits."
+  },
+  "product_demonstrations": {
+    "included": false,
+    "reason": "Isolated read-only published Beta snapshot opens locally, but map view has nine missing tiles due to external HTTPS net::ERR_CERT_AUTHORITY_INVALID. No working map-backed flow verified; no app footage used.",
+    "repository": "drkrook/silent-compass-testing",
+    "inspected_commit": "c94d7690fa5b70e3d75be2d38690e565c97cf67c",
+    "successful_app_run": 42805182871,
+    "repository_findings": "Repository contains beta overrides/assets; workflow composes actual app from baseline source. Artifact download was denied; verified HTTPS published static assets mirrored byte-for-byte for isolated local preview, without edits.",
+    "certificate_findings": "Chromium rejected the environment proxy certificate (issuer openai.com), while HTTPS clients using configured CA trust succeeded. Correct configured CA identity was checked and imported into an isolated temporary NSS database using documented certutil procedures; Chromium still rejected it. No global trust changes, invalid-certificate exceptions or verification bypasses used.",
+    "privacy": "No sign-in, real personal locations, production-data entry, app repository changes or user-data modification. Local test browser/profile and cached files are disposable."
+  },
+  "sources": [
+    {
+      "id": 8346124,
+      "creator": "Mikhail Nilov",
+      "source_page": "https://www.pexels.com/video/drone-footage-of-a-family-walking-on-mountain-8346124/",
+      "download_url": "https://videos.pexels.com/video-files/8346124/8346124-hd_1280_720_25fps.mp4",
+      "license": "https://www.pexels.com/license/",
+      "description": "Drone footage of hikers exploring a scenic rocky terrain during sunset.",
+      "source_page_sha256": "d764999c71b6b898081bb2c422427695af9de90877c4257b25974205422332b6",
+      "source_sha256": "00cd9aacb22b66a7833a15a44056195d08546e52a2af9d94a352c9829930b6ae",
+      "selection": "10-second excerpt, starting at 2s; normalized to 1280\u00d7720 / 24fps; no audio."
+    },
+    {
+      "id": 9242518,
+      "creator": "Ron Lach",
+      "source_page": "https://www.pexels.com/video/family-walking-together-in-a-forest-9242518/",
+      "download_url": "https://videos.pexels.com/video-files/9242518/9242518-hd_1366_720_25fps.mp4",
+      "license": "https://www.pexels.com/license/",
+      "description": "A family enjoys a peaceful walk through the serene forest in daylight.",
+      "source_page_sha256": "dbea6a722b00ec02b39a8b82116be68fe9cd0f15e982cfde5ab8e5a1118e3b31",
+      "source_sha256": "d0b608ca5992d6b898c8f599cc075e7dced411117d048268e6e0231065ff4fa6",
+      "selection": "10-second excerpt, starting at 2s; normalized to 1280\u00d7720 / 24fps; no audio."
+    },
+    {
+      "id": 6942274,
+      "creator": "Martina Tom\u0161i\u010d",
+      "source_page": "https://www.pexels.com/video/family-going-down-the-hill-to-a-shelter-6942274/",
+      "download_url": "https://videos.pexels.com/video-files/6942274/6942274-hd_1280_720_30fps.mp4",
+      "license": "https://www.pexels.com/license/",
+      "description": "Family enjoys a scenic hike outdoors on a sunny day.",
+      "source_page_sha256": "1c07ed921144294de252a238d9fdc2f13992b55da168a65fa5b54fecb82b3f90",
+      "source_sha256": "8f750ac5aa8cd1dbb57c0f59fb595533225efac5ffa4f003256dc4dbf7730835",
+      "selection": "10-second excerpt, starting at 0.5s; normalized to 1280\u00d7720 / 24fps; no audio."
+    }
+  ],
+  "exports": [
+    {
+      "path": "public/media/home/adventure-loop.mp4",
+      "bytes": 7199764,
+      "sha256": "b6bc8ef2389cae9efc906ef6d0701be39c5585c88d1a09130d97f1c311ab90f4",
+      "width": 1280,
+      "height": 720,
+      "duration": 28.458333,
+      "codec": "h264",
+      "audio_streams": 0
+    },
+    {
+      "path": "public/media/home/adventure-loop.webm",
+      "bytes": 7231895,
+      "sha256": "436062807ddc923a50ba87fda0e3ee6d26047859eb0db2ce38d373aa1cd07ba5",
+      "width": 1280,
+      "height": 720,
+      "duration": 28.5,
+      "codec": "vp9",
+      "audio_streams": 0
+    },
+    {
+      "path": "public/media/home/adventure-poster-1280.webp",
+      "bytes": 136246,
+      "sha256": "a9600f6da7114b3e85e26d4660c8cf59bd582ff5d8b159bda3024a5ea2a3b870",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "path": "public/media/home/adventure-poster-640.webp",
+      "bytes": 51884,
+      "sha256": "eb5357e831d32d0825f5994755987ebf6bed12a91c94cc6c1828dcadb571be96",
+      "width": 640,
+      "height": 360
+    }
+  ],
+  "cache_query": "v=1.7b1"
+}

@@ -23,15 +23,24 @@ for(const destination of ['pricing/#travel-title','pricing/#survival-title','con
 assert.ok(home.includes('id="how-it-works"'));
 assert.ok(home.includes('Professional offerings planned.'));
 assert.ok(!/type="submit"|checkout|free trial/i.test(home));
-const manifest=JSON.parse(await readFile('docs/V1.7B-MEDIA-PROVENANCE.json','utf8'));
+const manifest=JSON.parse(await readFile('docs/V1.7B.1-MEDIA-PROVENANCE.json','utf8'));
 for(const asset of manifest.exports){
  const bytes=await readFile(asset.path);
+ assert.ok(home.includes(asset.path.replace('public/','/ledovia-website-beta/')+'?'+manifest.cache_query));
+ if(process.argv.includes('--live')){
+  const response=await fetch('https://drkrook.github.io/ledovia-website-beta/'+asset.path.slice('public/'.length)+'?'+manifest.cache_query,{cache:'no-store'});
+  assert.equal(response.status,200);const published=Buffer.from(await response.arrayBuffer());
+  assert.equal(createHash('sha256').update(published).digest('hex'),asset.sha256);
+ }
  assert.equal(bytes.length,asset.bytes);
  assert.equal(createHash('sha256').update(bytes).digest('hex'),asset.sha256);
  if(asset.path.endsWith('.webp')){const metadata=await sharp(bytes).metadata();assert.equal(metadata.width,asset.width);assert.equal(metadata.height,asset.height);}
- else{assert.ok(asset.duration>=20 && asset.duration<=30);assert.equal(asset.audio_streams,0);assert.equal(asset.width,1280);assert.equal(asset.height,720);assert.ok(asset.bytes<8_000_000);}
+ else{assert.ok(asset.duration>=25 && asset.duration<=35);assert.equal(asset.audio_streams,0);assert.equal(asset.width,1280);assert.equal(asset.height,720);assert.ok(asset.bytes<8_000_000);}
 }
 for(const source of manifest.sources){assert.equal(source.license,'https://www.pexels.com/license/');assert.ok(source.creator);assert.match(source.source_sha256,/^[a-f0-9]{64}$/);assert.ok(home.includes(source.source_page));}
+assert.ok(!home.includes('9210957'), 'Passive campsite scene must not remain in homepage credits');
+assert.ok(home.includes('6942274'));
+assert.ok(home.includes('home-refresh'));
 // Execute the shipped film controller with small DOM/media doubles to test download policy.
 const filmSource=await readFile('src/components/AdventureFilm.astro','utf8');
 const script=filmSource.match(/<script>([\s\S]*?)<\/script>/)[1];
@@ -52,4 +61,4 @@ for(const options of [{mobile:true},{reduced:true},{saveData:true},{mobile:true,
 }
 const desktop=scenario();assert.equal(desktop.film.plays,1);desktop.toggle.emit('click');assert.equal(desktop.film.paused,true);desktop.document.emit('visibilitychange');assert.equal(desktop.film.plays,1,'User pause must survive policy checks');
 const changed=scenario();changed.motion.matches=true;changed.motion.emit('change');assert.equal(changed.film.paused,true);assert.ok(changed.sources.every(source=>!source.src));
-console.log('PASS homepage: licensed media hashes/dimensions, silent 20–30s encodes, source-only video loading; mobile/reduced-motion/data-saving poster policy, explicit play/pause and motion preference changes tested using DOM/media doubles. Browser rendering unverified.');
+console.log('PASS homepage: licensed media hashes/dimensions, silent 25–35s encodes, source-only video loading; mobile/reduced-motion/data-saving poster policy, explicit play/pause and motion preference changes tested using DOM/media doubles. Browser rendering unverified.');
