@@ -200,3 +200,5 @@ assert.equal(responseUpdate.assets[0].license,'Pexels License');
 console.log('PASS professional photography: four responsive WebP variants decoded, dimensions/bytes/SHA-256 match provenance; current source credits and no-affiliation notice present.');
 
 await import('./verify-homepage.mjs');
+
+await import('./verify-theme.mjs');

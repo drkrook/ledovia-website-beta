@@ -9,7 +9,7 @@
   <div class="field"><label for="inquiry-product">Product interest <span>(required)</span></label><select id="inquiry-product" required aria-describedby="inquiry-product-error"><option value="">Choose an inquiry type</option><option value="general" selected>General inquiry</option><option value="response">Ledovia Response</option><option value="government">Ledovia Government</option></select><p class="field-error" id="inquiry-product-error"></p></div>
   <div class="field"><label for="inquiry-needs">Brief description of needs <span>(required)</span></label><textarea id="inquiry-needs" required minlength="20" maxlength="2000" rows="5" aria-describedby="inquiry-needs-hint inquiry-needs-error"></textarea><p class="field-hint" id="inquiry-needs-hint">20–2,000 characters. A high-level description is enough.</p><p class="field-error" id="inquiry-needs-error"></p></div>
   <p class="privacy-note" id="inquiry-privacy">Keep descriptions general. Do not enter personal records, precise sensitive locations, credentials, or confidential operational information. This website does not transmit or store this draft. Direct email uses your email provider and sends only when you choose to send it.</p>
-  <button class="button" id="inquiry-check" type="button" disabled>Check details locally <span aria-hidden="true">↗</span></button><p class="form-feedback" id="inquiry-feedback" role="status" aria-live="polite">No message has been sent.</p>
+  <button class="button" id="inquiry-check" type="button" disabled>Check details locally <span aria-hidden="true">→</span></button><p class="form-feedback" id="inquiry-feedback" role="status" aria-live="polite">No message has been sent.</p>
   <noscript><p class="privacy-note">Local validation requires JavaScript. Sending remains unavailable; please use a direct email link.</p></noscript>
  </form>
 </section>
@@ -46,14 +46,16 @@ if(form && check) {
 }
 </script>
 <style>
-.inquiry-form-panel{background:var(--white);border:1px solid var(--line);padding:34px;border-radius:4px;min-width:0}
+.inquiry-form-panel{background:var(--surface);border:1px solid var(--line);padding:34px;border-radius:4px;min-width:0}
 h3{font-size:2rem}.eyebrow{font-size:.61rem;letter-spacing:.12em;margin-bottom:18px}
-.delivery-notice{background:var(--mist);padding:18px;border-left:3px solid var(--amber);font-size:.84rem;margin-bottom:26px}.delivery-notice p{margin:8px 0 0}
+.delivery-notice{background:var(--surface-alt);padding:18px;border-left:3px solid var(--amber);font-size:.84rem;margin-bottom:26px}.delivery-notice p{margin:8px 0 0}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}.field{margin-bottom:18px;min-width:0}
 label{display:block;font-weight:650;font-size:.85rem;margin-bottom:7px}label span{font-weight:400;font-size:.73rem}
-input,select,textarea{display:block;width:100%;max-width:100%;min-width:0;padding:12px 13px;min-height:48px;border:1px solid var(--trail);border-radius:3px;background:var(--white);color:var(--night);font:inherit;font-size:1rem;box-sizing:border-box}textarea{resize:vertical;line-height:1.6}
-input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--trail);outline-offset:3px}
-[aria-invalid="true"]{border:2px solid var(--expedition)}.field-error{font-size:.78rem;font-weight:650;line-height:1.6;margin:6px 0 0}.field-error:empty{display:none}.field-hint,.privacy-note{font-size:.75rem;line-height:1.8;margin:7px 0 0}.privacy-note{margin:22px 0}
-button{font-family:inherit;cursor:pointer}button:focus-visible{outline:3px solid var(--trail);outline-offset:4px}button:disabled{opacity:.65;cursor:default}.form-feedback{font-size:.8rem;margin:14px 0 0}
+input,select,textarea{display:block;width:100%;max-width:100%;min-width:0;padding:12px 13px;min-height:48px;border:1px solid var(--control-border);border-radius:3px;background:var(--surface-alt);color:var(--text);font:inherit;font-size:1rem;box-sizing:border-box}textarea{resize:vertical;line-height:1.6}
+input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+[aria-invalid="true"]{border:2px solid var(--amber)}.field-error{color:var(--amber);font-size:.78rem;font-weight:650;line-height:1.6;margin:6px 0 0}.field-error:empty{display:none}.field-hint,.privacy-note{font-size:.75rem;line-height:1.8;margin:7px 0 0}.privacy-note{margin:22px 0}
+button{font-family:inherit;cursor:pointer}button:focus-visible{outline:3px solid var(--focus);outline-offset:4px}button:disabled{opacity:.65;cursor:default}.form-feedback{font-size:.8rem;margin:14px 0 0}
 @media(max-width:650px){.inquiry-form-panel{padding:24px}.form-row{grid-template-columns:1fr;gap:0}h3{font-size:1.65rem}.eyebrow{font-size:.57rem}}
+
+input:disabled,select:disabled,textarea:disabled{opacity:.7;cursor:not-allowed}
 </style>
