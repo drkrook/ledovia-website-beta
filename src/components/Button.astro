@@ -1,5 +1,5 @@
 ---
-interface Props { href: string; }
-const {href}=Astro.props;
+interface Props { href: string; arrow?: string; }
+const {href,arrow='↗'}=Astro.props;
 ---
-<a class="button" href={href}><slot/><span aria-hidden="true">↗</span></a>
+<a class="button" href={href}><slot/><span aria-hidden="true">{arrow}</span></a>

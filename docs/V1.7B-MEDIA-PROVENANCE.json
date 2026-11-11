@@ -1,0 +1,84 @@
+{
+  "mission": "V1.7B",
+  "verified_date": "2026-11-10",
+  "license": "Pexels License",
+  "license_url": "https://www.pexels.com/license/",
+  "license_page_sha256": "8e8a442a31dadd42d5564abe0badea1824350f125e2d4e19e885bc3685279a3e",
+  "permissions": "Free commercial website and promotional use; modification permitted; attribution optional and supplied.",
+  "restrictions": "No implied endorsement, offensive portrayal of identifiable people, unaltered resale, stock-platform redistribution, or trademark use.",
+  "processing": "Three inspected 8.5s excerpts joined by 0.5s crossfades, including return to opening shot; opening offset trimmed for continuous loop. 1280\u00d7720 at 24fps; H.264 MP4 fast-start / VP9 WebM; all audio removed. Poster extracted from final encoded film and resized to 640/1280px WebP.",
+  "inspection": "Selected segments sampled at 2/6/10s; real outdoor scenes, no visible watermarks or added endorsements. Final exports inspected separately.",
+  "product_demonstrations": "Omitted: actual browser attempt to open the app reference https://drkrook.github.io/silent-compass-testing/index.html returned net::ERR_CERT_AUTHORITY_INVALID / Privacy error. No verified product interface captured; certificate checks were not bypassed. Adventure film is lifestyle illustration, not app-functionality evidence.",
+  "reused_photography": "Existing approved Pricing card assets reused byte-for-byte. Source/rights/checksums: V1.7A.2 (Travel/Survival), V1.7A.3 (Government), V1.7A.4 (Response).",
+  "sources": [
+    {
+      "id": 8346124,
+      "creator": "Mikhail Nilov",
+      "source_page": "https://www.pexels.com/video/drone-footage-of-a-family-walking-on-mountain-8346124/",
+      "download_url": "https://videos.pexels.com/video-files/8346124/8346124-hd_1280_720_25fps.mp4",
+      "license": "https://www.pexels.com/license/",
+      "description": "Drone footage of hikers exploring a scenic rocky terrain during sunset.",
+      "source_page_sha256": "d764999c71b6b898081bb2c422427695af9de90877c4257b25974205422332b6",
+      "source_sha256": "00cd9aacb22b66a7833a15a44056195d08546e52a2af9d94a352c9829930b6ae",
+      "selection": "2.0\u201310.5 seconds; resized/cropped to 1280\u00d7720, 24fps; audio removed."
+    },
+    {
+      "id": 9210957,
+      "creator": "Ron Lach",
+      "source_page": "https://www.pexels.com/video/happy-family-in-a-camping-site-9210957/",
+      "download_url": "https://videos.pexels.com/video-files/9210957/9210957-hd_1366_720_25fps.mp4",
+      "license": "https://www.pexels.com/license/",
+      "description": "Family enjoying a warm campfire in a scenic forest setting.",
+      "source_page_sha256": "18034d18356a9a9f551c315985fc719729cade6f096dbd9ccb92b189704a736b",
+      "source_sha256": "b284e6c8bb9c47c033e1ee275f5a0773e0cfced88d7181dfc998bfb4f424ceb8",
+      "selection": "2.0\u201310.5 seconds; resized/cropped to 1280\u00d7720, 24fps; audio removed."
+    },
+    {
+      "id": 9242518,
+      "creator": "Ron Lach",
+      "source_page": "https://www.pexels.com/video/family-walking-together-in-a-forest-9242518/",
+      "download_url": "https://videos.pexels.com/video-files/9242518/9242518-hd_1366_720_25fps.mp4",
+      "license": "https://www.pexels.com/license/",
+      "description": "A family enjoys a peaceful walk through the serene forest in daylight.",
+      "source_page_sha256": "dbea6a722b00ec02b39a8b82116be68fe9cd0f15e982cfde5ab8e5a1118e3b31",
+      "source_sha256": "d0b608ca5992d6b898c8f599cc075e7dced411117d048268e6e0231065ff4fa6",
+      "selection": "2.0\u201310.5 seconds; resized/cropped to 1280\u00d7720, 24fps; audio removed."
+    }
+  ],
+  "exports": [
+    {
+      "path": "public/media/home/adventure-loop.mp4",
+      "bytes": 5749374,
+      "sha256": "d322c7708988e8b7142aa5804322eb8498761cff1fe868feceeb10b266d3c4d8",
+      "width": 1280,
+      "height": 720,
+      "duration": 23.958333,
+      "codec": "h264",
+      "audio_streams": 0
+    },
+    {
+      "path": "public/media/home/adventure-loop.webm",
+      "bytes": 7001171,
+      "sha256": "39281fac61e9030d460104ddf20ef9e8307be596b1ca0daecc981741f8ad734c",
+      "width": 1280,
+      "height": 720,
+      "duration": 24.0,
+      "codec": "vp9",
+      "audio_streams": 0
+    },
+    {
+      "path": "public/media/home/adventure-poster-1280.webp",
+      "bytes": 149552,
+      "sha256": "63d3d1b4684d325ebf824f253ca4f8026ed8a2bae23f376469c5710b0868a43e",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "path": "public/media/home/adventure-poster-640.webp",
+      "bytes": 54236,
+      "sha256": "9385e553142a218e1f6fa7a215042b575d7778bf85b946472219ddabc3736e3f",
+      "width": 640,
+      "height": 360
+    }
+  ]
+}

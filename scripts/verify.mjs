@@ -198,3 +198,5 @@ for(const asset of photoManifest.assets){
 assert.ok(!/Department of War|dvidshub|USACE|8231203/.test(pricing));
 assert.equal(responseUpdate.assets[0].license,'Pexels License');
 console.log('PASS professional photography: four responsive WebP variants decoded, dimensions/bytes/SHA-256 match provenance; current source credits and no-affiliation notice present.');
+
+await import('./verify-homepage.mjs');

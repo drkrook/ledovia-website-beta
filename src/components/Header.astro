@@ -1,8 +1,11 @@
 ---
 import {url} from '../lib/paths';
-const links=[['Solutions',url('#solutions')],['How it works',url('how-it-works/')],['Pricing',url('pricing/')],['Our story',url('about/')],['Get in touch',url('contact/')]];
+interface Props {cinematic?:boolean;}
+const {cinematic=false}=Astro.props;
+const standardLinks=[['Solutions',url('#solutions')],['How it works',url('how-it-works/')],['Pricing',url('pricing/')],['Our story',url('about/')],['Get in touch',url('contact/')]];
+const links=cinematic ? [['Home',url()],['How it works','#how-it-works'],['Pricing / Solutions',url('pricing/')],['Get in touch',url('contact/')]] : standardLinks;
 ---
-<header><div class="container header-inner"><a class="brand" href={url()} aria-label="Ledovia home"><img src={url('brand/ledovia-logo-teal.svg')} alt="LEDOVIA" width="400" height="240" fetchpriority="high"/></a><nav aria-label="Main navigation"><div class="desktop-nav">{links.map(([label,href])=><a class:list={{'nav-cta':label==='Get in touch'}} href={href}>{label}{label==='Get in touch' && <span aria-hidden="true"> ↗</span>}</a>)}</div><details class="mobile-nav"><summary>Menu <span aria-hidden="true">＋</span></summary><div class="mobile-links">{links.map(([label,href])=><a href={href}>{label}</a>)}</div></details></nav></div></header>
+<header class={cinematic ? 'cinematic-header' : undefined}><div class="container header-inner"><a class="brand" href={url()} aria-label="Ledovia home"><img src={url(cinematic ? 'brand/ledovia-logo-white.svg' : 'brand/ledovia-logo-teal.svg')} alt="LEDOVIA" width="400" height="240" fetchpriority="high"/></a><nav aria-label="Main navigation"><div class="desktop-nav">{links.map(([label,href])=><a class:list={{'nav-cta':label==='Get in touch'}} href={href}>{label}{label==='Get in touch' && <span aria-hidden="true">{cinematic ? ' →' : ' ↗'}</span>}</a>)}</div><details class="mobile-nav"><summary>Menu <span aria-hidden="true">＋</span></summary><div class="mobile-links">{links.map(([label,href])=><a href={href}>{label}</a>)}</div></details></nav></div></header>
 <script>
 const menu=document.querySelector<HTMLDetailsElement>('.mobile-nav');
 menu?.addEventListener('keydown',event=>{if(event.key==='Escape'){menu.open=false;menu.querySelector('summary')?.focus();}});
@@ -10,6 +13,13 @@ menu?.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{men
 </script>
 
 <style>
+.cinematic-header{background:var(--expedition);color:var(--frost)}
+.cinematic-header .header-inner{min-height:106px}.cinematic-header .brand img{width:140px}
+.cinematic-header .nav-cta{border-color:var(--amber);color:var(--amber)}
+.cinematic-header .nav-cta:hover{background:var(--amber);color:var(--night)}
+.cinematic-header a:focus-visible,.cinematic-header summary:focus-visible{outline-color:var(--amber)}
+.cinematic-header .mobile-links{color:var(--expedition)}
+
 /* The extra navigation item uses the existing menu pattern on narrow tablets. */
 @media (min-width:651px) and (max-width:800px) {
  .desktop-nav{display:none}
